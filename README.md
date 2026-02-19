@@ -1,15 +1,19 @@
 # AGI Brain Simulation
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jeebus87/agi-brain/blob/master/notebooks/agi_brain_colab.ipynb)
+[![Language Learning](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jeebus87/agi-brain/blob/master/notebooks/agi_language_learning.ipynb)
 
-Spiking Neural Network cognitive architecture using Nengo/NengoSPA.
+Spiking Neural Network cognitive architecture that learns language from scratch - no pre-trained LLMs.
 
 ## Features
 
-- **125K+ Neuron Architecture** - Working memory, rule application, analogy engine, executive control
-- **Persistent Memory** - Perfect retention with 12 memory slots
-- **Neural Plasticity** - STDP, PES learning, reward-modulated plasticity
-- **Embodied Agent** - GridWorld navigation with sensory processing and motor control
+- **10M+ Neuron Sparse Architecture** - Efficient memory usage, fits in free Colab GPU
+- **Language Learning from Scratch** - No pre-trained models, learns through STDP
+- **Speech I/O** - Cochlea-based audio encoding, formant speech synthesis
+- **Semantic Memory** - Sparse Distributed Memory for word associations
+- **YouTube/Web Learning** - Learn from videos and web pages
+- **125K+ Neuron Reasoning** - Working memory, rule application, analogy engine
+- **Embodied Agent** - GridWorld navigation with visual sensing
 - **GPU Acceleration** - TensorFlow backend for large-scale simulation
 
 ## Quick Start
@@ -44,12 +48,35 @@ agi-brain/
 │   ├── cognition/      # Working memory, executive control
 │   ├── reasoning/      # 100K POC, rules engine
 │   ├── learning/       # STDP, associative learning
+│   ├── language/       # Language learning from scratch
+│   │   ├── sparse_network.py    # 10M neuron efficient SNN
+│   │   ├── audio_encoder.py     # Cochlea simulation
+│   │   ├── phoneme_learner.py   # STDP phoneme recognition
+│   │   ├── semantic_memory.py   # Word-meaning associations
+│   │   └── speech_generator.py  # Neural vocoder
+│   ├── interface/      # Chat UI, voice I/O, learning pipeline
 │   ├── integration/    # Embodiment, environment
 │   └── acceleration/   # GPU backend, benchmarks
 ├── examples/           # Demo scripts
 ├── notebooks/          # Colab notebooks
 └── tests/              # Unit tests
 ```
+
+## Language Learning
+
+The brain learns language without any pre-trained LLM:
+
+| Component | Function |
+|-----------|----------|
+| **Cochlea Encoder** | Converts audio to spike patterns (like biological ear) |
+| **Phoneme Learner** | Recognizes speech sounds via STDP |
+| **Semantic Memory** | Associates words with meanings |
+| **Speech Generator** | Produces speech from neural activity |
+
+### Learning Sources
+- **Conversation** - Learns from chat interactions
+- **YouTube** - Downloads and transcribes videos
+- **Web Pages** - Extracts and learns from text content
 
 ## Benchmarks
 
