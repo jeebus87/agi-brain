@@ -19,9 +19,22 @@ Spiking Neural Network cognitive architecture that learns language from scratch 
 
 ## Quick Start
 
-### Run on Google Colab (Recommended)
+### Web App (Recommended)
 
-Click the badge above or [open the notebook directly](https://colab.research.google.com/github/jeebus87/agi-brain/blob/master/notebooks/agi_brain_colab.ipynb).
+Modern chat interface that saves your brain locally:
+
+```bash
+git clone https://github.com/jeebus87/agi-brain.git
+cd agi-brain
+pip install fastapi uvicorn numpy
+python run_web.py
+```
+
+Open http://localhost:8000 - looks like ChatGPT, saves brain automatically.
+
+### Google Colab
+
+Click the badges above to run in browser (no install needed).
 
 ### Run Locally
 
