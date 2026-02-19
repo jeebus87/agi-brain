@@ -168,7 +168,7 @@ class ProblemEncoder(spa.Network):
 class WorkingMemoryBuffer(spa.Network):
     """Working Memory Buffer (~15K neurons).
 
-    Implements a savant-like working memory with:
+    Implements an enhanced working memory with:
     - 12 slots (expanded capacity)
     - Perfect retention (no decay)
     - Content-addressable retrieval
@@ -182,7 +182,7 @@ class WorkingMemoryBuffer(spa.Network):
         self,
         vocab: spa.Vocabulary,
         n_slots: int = 12,  # Expanded from 7 for complex reasoning
-        decay_rate: float = 1.0,  # Perfect retention (savant mode)
+        decay_rate: float = 1.0,  # Perfect retention (persistent mode)
         label: str = "working_memory",
         **kwargs
     ):
@@ -198,7 +198,7 @@ class WorkingMemoryBuffer(spa.Network):
             for i in range(n_slots):
                 slot = spa.State(
                     vocab,
-                    feedback=decay_rate,  # 1.0 = no decay (savant mode)
+                    feedback=decay_rate,  # 1.0 = no decay (persistent mode)
                     feedback_synapse=0.1,
                     label=f"wm_slot_{i}"
                 )
@@ -326,7 +326,7 @@ class RuleApplicationEngine(spa.Network):
             # Combined conclusion (perfect retention for reasoning chains)
             self.conclusion = spa.State(
                 vocab,
-                feedback=1.0,  # Savant mode - no decay
+                feedback=1.0,  # Persistent mode - no decay
                 feedback_synapse=0.1,
                 label="conclusion"
             )
@@ -424,10 +424,10 @@ class AnalogyEngine(spa.Network):
             # Extracted relation
             self.relation = spa.State(vocab, label="relation")
 
-            # Result (D) - perfect retention for savant mode
+            # Result (D) - perfect retention
             self.target_d = spa.State(
                 vocab,
-                feedback=1.0,  # Savant mode - no decay
+                feedback=1.0,  # Persistent mode - no decay
                 feedback_synapse=0.1,
                 label="target_d"
             )
@@ -586,7 +586,7 @@ class ResponseGenerator(spa.Network):
             # Cleaned up response - perfect retention
             self.response = spa.State(
                 vocab,
-                feedback=1.0,  # Savant mode - no decay
+                feedback=1.0,  # Persistent mode - no decay
                 feedback_synapse=0.1,
                 label="response"
             )

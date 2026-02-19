@@ -183,7 +183,7 @@ class EmbodiedAgent:
             nengo.Connection(model.vision_semantic.output, model.percept_bind.input_left)
             nengo.Connection(model.body_semantic.output, model.percept_bind.input_right)
 
-            # Working memory (savant mode - perfect retention)
+            # Working memory (persistent mode - perfect retention)
             model.working_memory = spa.State(
                 vocab,
                 feedback=1.0,  # Perfect retention

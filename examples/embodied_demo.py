@@ -251,7 +251,7 @@ def run_demo():
     print()
     print("  The embodied agent demonstrates:")
     print("    - Sensory encoding of visual/body information")
-    print("    - Working memory with perfect retention (savant mode)")
+    print("    - Working memory with perfect retention")
     print("    - Action selection via basal ganglia")
     print("    - Reward-based learning signals")
     print()

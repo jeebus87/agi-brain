@@ -7,7 +7,7 @@ Spiking Neural Network cognitive architecture using Nengo/NengoSPA.
 ## Features
 
 - **125K+ Neuron Architecture** - Working memory, rule application, analogy engine, executive control
-- **Savant-Mode Memory** - Perfect retention with 12 memory slots
+- **Persistent Memory** - Perfect retention with 12 memory slots
 - **Neural Plasticity** - STDP, PES learning, reward-modulated plasticity
 - **Embodied Agent** - GridWorld navigation with sensory processing and motor control
 - **GPU Acceleration** - TensorFlow backend for large-scale simulation
@@ -63,7 +63,7 @@ agi-brain/
 
 ### Reasoning POC (125K neurons)
 - Problem Encoder (~20K neurons)
-- Working Memory Buffer (~15K neurons, savant mode)
+- Working Memory Buffer (~15K neurons, persistent mode)
 - Rule Application Engine (~20K neurons)
 - Analogy Engine (~15K neurons)
 - Executive Controller (~20K neurons)
