@@ -2,6 +2,7 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jeebus87/agi-brain/blob/master/notebooks/agi_brain_colab.ipynb)
 [![Language Learning](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jeebus87/agi-brain/blob/master/notebooks/agi_language_learning.ipynb)
+[![Quick Chat](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jeebus87/agi-brain/blob/master/notebooks/agi_chat_quick.ipynb)
 
 Spiking Neural Network cognitive architecture that learns language from scratch - no pre-trained LLMs.
 
