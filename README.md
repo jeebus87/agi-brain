@@ -80,7 +80,7 @@ agi-brain/
 - Vision processing (V1 -> IT pathway)
 - Proprioception encoding
 - Basal ganglia action selection
-- 40% navigation success rate
+- Goal-directed navigation with visual sensing
 
 ## License
 

@@ -23,6 +23,7 @@ class AgentConfig:
     n_neurons_per_dim: int = 30
     vision_range: int = 3
     learning_rate: float = 1e-4
+    goal_bias_strength: float = 2.0  # How strongly to bias toward goal
     seed: int = 42
 
 
@@ -59,6 +60,7 @@ class EmbodiedAgent:
         # For real-time input/output
         self._sensory_values: Dict[str, np.ndarray] = {}
         self._motor_output: np.ndarray = np.zeros(self.n_actions)
+        self._goal_bias: np.ndarray = np.zeros(self.n_actions)  # Goal-seeking bias
 
     def _build_model(self) -> Tuple[spa.Network, Dict]:
         """Build complete neural model"""
@@ -205,6 +207,13 @@ class EmbodiedAgent:
             # ACTION SELECTION (Basal Ganglia)
             # ============================================
 
+            # Goal bias input (computed from vision)
+            model.goal_bias_input = nengo.Node(
+                output=lambda t: self._goal_bias,
+                size_out=self.n_actions,
+                label="goal_bias_input"
+            )
+
             # Map decision state to action values
             model.action_values = nengo.Ensemble(
                 n_neurons=self.n_actions * 100,
@@ -219,7 +228,14 @@ class EmbodiedAgent:
             nengo.Connection(
                 model.decision_state.output,
                 model.action_values,
-                transform=action_encoders
+                transform=action_encoders * 0.3  # Reduced weight for learned component
+            )
+
+            # Add goal bias directly to action values
+            nengo.Connection(
+                model.goal_bias_input,
+                model.action_values,
+                transform=1.0  # Direct goal-seeking signal
             )
 
             # Basal ganglia winner-take-all
@@ -317,6 +333,42 @@ class EmbodiedAgent:
         self._motor_output = x.copy()
         return x
 
+    def _compute_goal_bias(self, vision: np.ndarray) -> np.ndarray:
+        """Compute action bias toward goal based on vision field.
+
+        Vision field is centered on agent. Goal cells have value 2.
+        Actions: 0=up, 1=right, 2=down, 3=left, 4=stay
+        """
+        bias = np.zeros(5)
+        vision_2d = vision.reshape(int(np.sqrt(len(vision))), -1)
+        center = vision_2d.shape[0] // 2
+
+        # Find goal cells in vision
+        goal_mask = (vision_2d > 0.6) & (vision_2d < 0.7)  # Normalized goal value ~0.67
+        goal_positions = np.argwhere(goal_mask)
+
+        if len(goal_positions) > 0:
+            # Average direction to goals
+            for gpos in goal_positions:
+                dy = gpos[0] - center  # Positive = down
+                dx = gpos[1] - center  # Positive = right
+
+                if dy < 0:
+                    bias[0] += abs(dy)  # up
+                elif dy > 0:
+                    bias[2] += abs(dy)  # down
+
+                if dx > 0:
+                    bias[1] += abs(dx)  # right
+                elif dx < 0:
+                    bias[3] += abs(dx)  # left
+
+            # Normalize and scale
+            if bias.sum() > 0:
+                bias = bias / bias.sum() * self.config.goal_bias_strength
+
+        return bias
+
     def _encode_observation(self, obs: Observation):
         """Convert observation to neural inputs"""
         vision_flat = obs.vision.flatten().astype(np.float32)
@@ -329,6 +381,9 @@ class EmbodiedAgent:
             'proprioception': obs.proprioception,
             'reward': np.array([obs.reward])
         }
+
+        # Compute goal-seeking bias from vision
+        self._goal_bias = self._compute_goal_bias(vision_norm)
 
     def reset(self) -> Observation:
         """Reset environment and agent state"""
