@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agi-brain"
+version = "0.1.0"
+description = "Brain-simulation AGI system using spiking neural networks"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "AGI Research Team"}
+]
+keywords = ["agi", "spiking-neural-networks", "cognitive-architecture", "brain-simulation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "nengo>=4.0.0",
+    "nengo-spa>=1.3.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "matplotlib>=3.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+gpu = [
+    "nengo-dl>=3.6.0",
+    "tensorflow>=2.12.0",
+]
+llm = [
+    "anthropic>=0.18.0",
+    "openai>=1.0.0",
+    "langchain>=0.1.0",
+]
+embodiment = [
+    "gymnasium>=0.29.0",
+    "mujoco>=3.0.0",
+]
+all = [
+    "agi-brain[dev,gpu,llm,embodiment]",
+]
+
+[project.urls]
+Homepage = "https://github.com/agi-research/agi-brain"
+Documentation = "https://github.com/agi-research/agi-brain#readme"
+Repository = "https://github.com/agi-research/agi-brain"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"

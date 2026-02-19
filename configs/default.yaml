@@ -1,0 +1,46 @@
+# AGI Brain Default Configuration
+# ================================
+
+# Network dimensions
+dimensions: 256
+
+# Neuron scale factor (1.0 = full scale, 0.01 = 1% for testing)
+scale: 0.01
+
+# Neuron counts at full scale (multiply by scale)
+neurons:
+  encoder: 20000
+  working_memory: 15000
+  rule_engine: 20000
+  analogy_engine: 15000
+  executive: 20000
+  response: 10000
+
+# Working memory settings
+working_memory:
+  n_slots: 7
+  feedback_strength: 0.95
+  decay_rate: 0.1
+
+# Executive control settings
+executive:
+  n_actions: 5
+  learning_rate: 0.01
+
+# Simulation settings
+simulation:
+  dt: 0.001  # 1ms timestep
+  seed: 42
+
+# Logging
+logging:
+  level: INFO
+  save_probes: true
+  output_dir: ./outputs
+
+# Benchmarks to run
+benchmarks:
+  - syllogism
+  - analogy
+  - tower_of_hanoi
+  - rule_induction
