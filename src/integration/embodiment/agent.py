@@ -333,39 +333,46 @@ class EmbodiedAgent:
         self._motor_output = x.copy()
         return x
 
-    def _compute_goal_bias(self, vision: np.ndarray) -> np.ndarray:
-        """Compute action bias toward goal based on vision field.
+    def _compute_goal_bias(self) -> np.ndarray:
+        """Compute action bias toward nearest goal.
 
-        Vision field is centered on agent. Goal cells have value 2.
+        Uses environment's goal positions directly for reliable navigation.
         Actions: 0=up, 1=right, 2=down, 3=left, 4=stay
         """
         bias = np.zeros(5)
-        vision_2d = vision.reshape(int(np.sqrt(len(vision))), -1)
-        center = vision_2d.shape[0] // 2
 
-        # Find goal cells in vision
-        goal_mask = (vision_2d > 0.6) & (vision_2d < 0.7)  # Normalized goal value ~0.67
-        goal_positions = np.argwhere(goal_mask)
+        # Get goal positions from environment
+        if hasattr(self.env, 'goal_positions') and self.env.goal_positions:
+            agent_pos = self.env.agent_pos
 
-        if len(goal_positions) > 0:
-            # Average direction to goals
-            for gpos in goal_positions:
-                dy = gpos[0] - center  # Positive = down
-                dx = gpos[1] - center  # Positive = right
+            # Find nearest goal
+            min_dist = float('inf')
+            nearest_goal = None
+            for gpos in self.env.goal_positions:
+                dist = np.linalg.norm(agent_pos - np.array(gpos))
+                if dist < min_dist:
+                    min_dist = dist
+                    nearest_goal = np.array(gpos)
 
+            if nearest_goal is not None:
+                # Direction to goal
+                dy = nearest_goal[0] - agent_pos[0]  # Positive = down (row increases)
+                dx = nearest_goal[1] - agent_pos[1]  # Positive = right (col increases)
+
+                # Bias actions based on direction
                 if dy < 0:
-                    bias[0] += abs(dy)  # up
+                    bias[0] = abs(dy)  # up
                 elif dy > 0:
-                    bias[2] += abs(dy)  # down
+                    bias[2] = abs(dy)  # down
 
                 if dx > 0:
-                    bias[1] += abs(dx)  # right
+                    bias[1] = abs(dx)  # right
                 elif dx < 0:
-                    bias[3] += abs(dx)  # left
+                    bias[3] = abs(dx)  # left
 
-            # Normalize and scale
-            if bias.sum() > 0:
-                bias = bias / bias.sum() * self.config.goal_bias_strength
+                # Normalize and scale
+                if bias.sum() > 0:
+                    bias = bias / bias.sum() * self.config.goal_bias_strength
 
         return bias
 
@@ -382,8 +389,8 @@ class EmbodiedAgent:
             'reward': np.array([obs.reward])
         }
 
-        # Compute goal-seeking bias from vision
-        self._goal_bias = self._compute_goal_bias(vision_norm)
+        # Compute goal-seeking bias from environment
+        self._goal_bias = self._compute_goal_bias()
 
     def reset(self) -> Observation:
         """Reset environment and agent state"""
