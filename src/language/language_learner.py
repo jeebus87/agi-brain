@@ -52,6 +52,12 @@ class WordStats:
     left_neighbors: Dict[str, int] = field(default_factory=lambda: defaultdict(int))
     right_neighbors: Dict[str, int] = field(default_factory=lambda: defaultdict(int))
 
+    # Feature-based co-occurrence: track patterns like "an" before vowel words
+    # Maps first letter of following word -> count
+    right_first_letter: Dict[str, int] = field(default_factory=lambda: defaultdict(int))
+    # Maps first letter of preceding word -> count
+    left_first_letter: Dict[str, int] = field(default_factory=lambda: defaultdict(int))
+
     # Learned roles
     is_likely_function_word: bool = False  # High frequency, appears in fixed positions
     is_likely_content_word: bool = False   # Lower frequency, variable positions
@@ -63,6 +69,8 @@ class WordStats:
             'position_counts': dict(self.position_counts),
             'left_neighbors': dict(self.left_neighbors),
             'right_neighbors': dict(self.right_neighbors),
+            'right_first_letter': dict(self.right_first_letter),
+            'left_first_letter': dict(self.left_first_letter),
             'is_likely_function_word': self.is_likely_function_word,
             'is_likely_content_word': self.is_likely_content_word,
         }
@@ -74,6 +82,8 @@ class WordStats:
         ws.position_counts = defaultdict(int, data.get('position_counts', {}))
         ws.left_neighbors = defaultdict(int, data.get('left_neighbors', {}))
         ws.right_neighbors = defaultdict(int, data.get('right_neighbors', {}))
+        ws.right_first_letter = defaultdict(int, data.get('right_first_letter', {}))
+        ws.left_first_letter = defaultdict(int, data.get('left_first_letter', {}))
         ws.is_likely_function_word = data.get('is_likely_function_word', False)
         ws.is_likely_content_word = data.get('is_likely_content_word', False)
         return ws
@@ -236,9 +246,15 @@ class LanguageLearner:
         if position > 0:
             left = all_words[position - 1]
             stats.left_neighbors[left] += 1
+            # Track first letter pattern
+            if left and left[0].isalpha():
+                stats.left_first_letter[left[0]] += 1
         if position < total_words - 1:
             right = all_words[position + 1]
             stats.right_neighbors[right] += 1
+            # Track first letter pattern - crucial for learning article patterns
+            if right and right[0].isalpha():
+                stats.right_first_letter[right[0]] += 1
 
     def _reclassify_words(self):
         """
@@ -453,26 +469,58 @@ class LanguageLearner:
         candidates.sort(key=lambda x: -x[0])
         _, template, pattern = candidates[0]
 
-        # Fill the pattern
-        filled = template
-        slots = re.findall(r'\[SLOT_(\d+)\]', template)
-
-        if len(slots) >= 2:
-            # First slot = subject, second slot = object
-            filled = filled.replace('[SLOT_1]', subject, 1)
-            filled = filled.replace('[SLOT_2]', obj, 1)
-        elif len(slots) == 1:
-            filled = filled.replace('[SLOT_1]', subject, 1)
-
-        # Clean up unfilled slots
-        filled = re.sub(r'\[SLOT_\d+\]', '', filled)
-        filled = ' '.join(filled.split())
+        # Fill the pattern with grammar correction
+        filled = self._fill_pattern_with_grammar(template, subject, obj)
 
         # Capitalize
         if filled:
             filled = filled[0].upper() + filled[1:]
 
         return filled if filled else None
+
+    def _fill_pattern_with_grammar(self, template: str, subject: str, obj: str) -> str:
+        """
+        Fill a pattern template with words, applying learned grammar rules.
+
+        This handles things like "a" vs "an" based on learned first-letter patterns.
+        """
+        # Split template into tokens
+        tokens = template.split()
+        result_tokens = []
+
+        slot_values = {'SLOT_1': subject, 'SLOT_2': obj}
+        i = 0
+
+        while i < len(tokens):
+            token = tokens[i]
+
+            # Check if this is a slot
+            slot_match = re.match(r'\[SLOT_(\d+)\]', token)
+            if slot_match:
+                slot_name = f"SLOT_{slot_match.group(1)}"
+                filler = slot_values.get(slot_name, '')
+
+                # Check if previous token is a function word that might need adjustment
+                if result_tokens and filler:
+                    prev_token = result_tokens[-1]
+                    prev_stats = self.word_stats.get(prev_token.lower())
+
+                    if prev_stats and prev_stats.is_likely_function_word:
+                        # Find the best variant of this function word for the filler
+                        best_variant = self._find_best_variant(prev_token.lower(), filler)
+                        if best_variant != prev_token.lower():
+                            # Replace the previous token with the better variant
+                            result_tokens[-1] = best_variant
+
+                result_tokens.append(filler)
+            else:
+                result_tokens.append(token)
+
+            i += 1
+
+        # Clean up unfilled slots and extra spaces
+        result = ' '.join(t for t in result_tokens if t and not re.match(r'\[SLOT_\d+\]', t))
+        return result
 
     def _combine_responses(self, responses: List[str]) -> str:
         """Combine multiple responses."""
@@ -485,6 +533,119 @@ class LanguageLearner:
     def can_speak(self) -> bool:
         """Check if the brain has learned enough to speak."""
         return len(self.patterns) > 0
+
+    def _find_best_variant(self, word: str, following_word: str) -> str:
+        """
+        Find the best variant of a word based on the following word.
+
+        This is learned, not hardcoded. The brain observes that certain words
+        (like "a"/"an") have different first-letter distributions for
+        following words, and picks the one that best matches.
+        """
+        if not following_word or not following_word[0].isalpha():
+            return word
+
+        first_letter = following_word[0].lower()
+        stats = self.word_stats.get(word)
+
+        if not stats:
+            return word
+
+        # Find potential variant words - not just function words
+        # Look for words that:
+        # 1. Are similar length (within 2 characters)
+        # 2. Have complementary first-letter distributions
+        # 3. Appear in similar positions
+        candidates = []
+        for other_word, other_stats in self.word_stats.items():
+            if other_word == word:
+                continue
+
+            # Must have enough observations
+            if other_stats.frequency < 10:
+                continue
+
+            # Similar length (variants like a/an, this/these tend to be similar length)
+            if abs(len(other_word) - len(word)) > 2:
+                continue
+
+            # Check if they could be positional variants
+            if self._are_positional_variants(stats, other_stats):
+                candidates.append((other_word, other_stats))
+
+        if not candidates:
+            return word
+
+        # Score each candidate (including original) by how well their
+        # first-letter patterns match the following word
+        best_word = word
+        best_score = stats.right_first_letter.get(first_letter, 0)
+
+        for cand_word, cand_stats in candidates:
+            score = cand_stats.right_first_letter.get(first_letter, 0)
+            if score > best_score:
+                best_score = score
+                best_word = cand_word
+
+        return best_word
+
+    def _are_positional_variants(self, stats1: WordStats, stats2: WordStats) -> bool:
+        """
+        Check if two words are likely variants (interchangeable in context).
+
+        For example, "a" and "an" are variants because:
+        1. They appear in similar positions (before nouns)
+        2. They have COMPLEMENTARY first-letter distributions (mutually exclusive)
+           - "a" before consonants, "an" before vowels
+
+        Words like "is" and "a" are NOT variants because they serve different roles.
+        """
+        # Both should have enough observations
+        if stats1.frequency < 10 or stats2.frequency < 10:
+            return False
+
+        # Key insight: true variants have COMPLEMENTARY first-letter patterns
+        # (they appear before different starting letters)
+        letters1 = set(stats1.right_first_letter.keys())
+        letters2 = set(stats2.right_first_letter.keys())
+
+        if not letters1 or not letters2:
+            return False
+
+        # Calculate overlap in first-letter distributions
+        shared_letters = letters1 & letters2
+        total_letters = letters1 | letters2
+
+        if not total_letters:
+            return False
+
+        overlap_ratio = len(shared_letters) / len(total_letters)
+
+        # True variants should have LOW overlap (complementary distributions)
+        # "a" appears before consonants, "an" before vowels = low overlap
+        # "is" and "a" both appear before many letters = high overlap
+        if overlap_ratio > 0.5:
+            return False  # Too much overlap - not true variants
+
+        # Also check they appear in similar sentence positions
+        # (both before content words, both early in sentence, etc.)
+        pos1 = dict(stats1.position_counts)
+        pos2 = dict(stats2.position_counts)
+
+        # Normalize position counts
+        total1 = sum(pos1.values()) or 1
+        total2 = sum(pos2.values()) or 1
+
+        # Check if relative position distributions are similar
+        position_similarity = 0
+        for pos in ['start', 'middle', 'first_third', 'middle_third']:
+            ratio1 = pos1.get(pos, 0) / total1
+            ratio2 = pos2.get(pos, 0) / total2
+            if abs(ratio1 - ratio2) < 0.2:  # Within 20%
+                position_similarity += 1
+
+        # Need similar positions AND complementary first-letter patterns
+        return position_similarity >= 2 and overlap_ratio < 0.5
 
     def get_stats(self) -> Dict:
         """Get learning statistics."""

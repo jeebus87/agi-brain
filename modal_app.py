@@ -25,6 +25,7 @@ image = (
         "pydantic>=2.0.0",
         "httpx>=0.24.0",
     )
+    .env({"CODE_VERSION": "v3_grammar_fix_20250219"})  # Version marker to force rebuild
     .add_local_dir("src", remote_path="/app/src")
     .add_local_dir("web_app", remote_path="/app/web_app")
     .add_local_dir("data", remote_path="/app/data")  # Pre-trained language patterns
