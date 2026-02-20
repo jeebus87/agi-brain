@@ -769,6 +769,15 @@ class FullAGIBrain:
 
         kg_stats = self.knowledge_graph.get_stats() if self.knowledge_graph else {}
 
+        # Get language learner stats
+        language_stats = {}
+        if self.thought_process and hasattr(self.thought_process, 'language_learner'):
+            ll_stats = self.thought_process.language_learner.get_stats()
+            language_stats = {
+                "language_vocabulary": ll_stats.get('vocabulary_size', 0),
+                "language_patterns": ll_stats.get('total_patterns', 0),
+            }
+
         return {
             "initialized": True,
             "neurons": self.config.n_neurons,
@@ -780,6 +789,7 @@ class FullAGIBrain:
             "conversations": len(self.conversation_history) // 2,
             "reasoning_enabled": self.config.enable_reasoning,
             "audio_enabled": self.config.enable_audio,
+            **language_stats,  # Include language learner stats
         }
 
     def save(self, path: str) -> bool:

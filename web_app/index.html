@@ -678,6 +678,10 @@
                     <span class="status-value" id="concept-count">0</span>
                 </div>
                 <div class="status-row">
+                    <span class="status-label">Grammar</span>
+                    <span class="status-value" id="grammar-count">0</span>
+                </div>
+                <div class="status-row">
                     <span class="status-label">Reasoning</span>
                     <span class="status-value" id="reasoning-status">Enabled</span>
                 </div>
@@ -1205,6 +1209,7 @@
                 document.getElementById('neuron-count').textContent = neurons >= 1000 ? (neurons / 1000) + 'K' : neurons;
                 document.getElementById('vocab-count').textContent = data.vocabulary_size || 0;
                 document.getElementById('concept-count').textContent = data.concepts || 0;
+                document.getElementById('grammar-count').textContent = data.language_patterns || 0;
                 document.getElementById('reasoning-status').textContent = data.reasoning_enabled ? 'Enabled' : 'Disabled';
             } catch (error) {
                 console.error(error);

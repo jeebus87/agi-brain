@@ -1099,9 +1099,13 @@ class AutonomousThoughtProcess:
             self.knowledge_graph.learn_from_text(input_text)
 
         if self.semantic_memory:
-            words = self._extract_concepts(input_text.lower())
-            if words:
-                self.semantic_memory.learn_from_sentence(words)
+            # Learn ALL words to semantic memory (not just filtered concepts)
+            # This allows the brain to learn vocabulary from teaching sentences
+            import re
+            clean_text = re.sub(r'[^\w\s]', '', input_text.lower())
+            all_words = [w for w in clean_text.split() if len(w) > 0]
+            if all_words:
+                self.semantic_memory.learn_from_sentence(all_words)
 
         # Track what we've learned
         concepts = self._extract_concepts(input_text.lower())
