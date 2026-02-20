@@ -32,22 +32,26 @@ image = (
 
 @app.function(
     image=image,
-    volumes={"/app/web_app/brain_data": brain_volume},
+    volumes={"/data/brain": brain_volume},
     gpu="T4",  # 16GB VRAM - plenty for 100K neurons
     timeout=600,
     scaledown_window=300,  # Keep warm for 5 min
 )
 @modal.concurrent(max_inputs=10)
-@modal.asgi_app()
+@modal.asgi_app(custom_domains=["xemsa.com"])
 def web():
     """Serve the AGI Brain FastAPI application."""
+    import os
     import sys
     sys.path.insert(0, "/app")
     sys.path.insert(0, "/app/src")
 
+    # Set environment variable for brain data location
+    os.environ["BRAIN_DATA_DIR"] = "/data/brain"
+
     # Ensure brain_data directories exist
     from pathlib import Path
-    brain_dir = Path("/app/web_app/brain_data")
+    brain_dir = Path("/data/brain")
     (brain_dir / "chats").mkdir(parents=True, exist_ok=True)
     (brain_dir / "trash").mkdir(parents=True, exist_ok=True)
 

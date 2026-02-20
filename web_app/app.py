@@ -26,8 +26,8 @@ from web_app.full_brain import FullAGIBrain, BrainConfig
 # Initialize app
 app = FastAPI(title="Xemsa - Autonomous AI")
 
-# Storage directories
-BRAIN_DIR = Path(__file__).parent / "brain_data"
+# Storage directories (use env var if set, otherwise local)
+BRAIN_DIR = Path(os.environ.get("BRAIN_DATA_DIR", Path(__file__).parent / "brain_data"))
 CHATS_DIR = BRAIN_DIR / "chats"
 TRASH_DIR = BRAIN_DIR / "trash"
 BRAIN_DIR.mkdir(exist_ok=True)
