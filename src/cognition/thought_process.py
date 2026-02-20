@@ -9,17 +9,22 @@ This is NOT pattern matching. The brain:
 - Asks questions when it doesn't know something
 
 Core Principles:
-1. No hardcoded responses - everything emerges from knowledge
+1. No hardcoded responses - everything emerges from learned patterns
 2. Curiosity drives learning - the brain WANTS to understand
 3. Knowledge shapes behavior - what it learns changes how it thinks
 4. Genuine reasoning - chains of inference, not lookups
+5. Language is LEARNED - the brain learns how to speak from input
 """
 
 from dataclasses import dataclass, field
 from typing import List, Dict, Optional, Tuple, Set
 from enum import Enum
 from datetime import datetime
+from pathlib import Path
 import random
+
+# Import the language learning system
+from src.language.language_learner import LanguageLearner, PatternType
 
 
 class ThoughtType(Enum):
@@ -342,8 +347,10 @@ class AutonomousThoughtProcess:
         self.satisfaction = 0.5  # How satisfied we are with our knowledge
         self.last_learned: List[str] = []  # Recent learnings (gives us "pleasure")
 
-        # Language generation system
-        self.language = LanguageGenerator()
+        # Language learning system - learns how to speak from input
+        # No hardcoded responses - everything is learned
+        self.language = LanguageGenerator()  # For input parsing (extract_relationships)
+        self.language_learner = LanguageLearner()  # For all language generation
 
     def think(self, input_text: str, conversation_history: List[Dict] = None) -> Tuple[str, List[Thought]]:
         """
@@ -386,7 +393,68 @@ class AutonomousThoughtProcess:
         # Update my knowledge from this interaction
         self._learn_from_interaction(input_text, response)
 
+        # === PHASE 7: LEARN LANGUAGE ===
+        # Learn sentence patterns from input
+        self.language_learner.learn_from_sentence(input_text)
+
         return response, self.thought_stream
+
+    def _generate_from_knowledge(self, subject: str, context: str = "general") -> Optional[str]:
+        """
+        Generate a response about a subject using learned language patterns.
+        No hardcoded responses - uses language_learner to compose from patterns.
+        """
+        if not self.knowledge_graph:
+            return None
+
+        # Get knowledge about the subject
+        knowledge = self.knowledge_graph.get_knowledge_about(subject)
+        if not knowledge.get('exists'):
+            return None
+
+        # Convert knowledge to facts for language generation - LIMIT to avoid verbose output
+        facts = []
+
+        # is_a relationships - take only the first 2
+        is_a_items = knowledge.get('is_a', [])
+        for category, strength in is_a_items[:2]:
+            if strength > 0.5:
+                facts.append((subject, 'is_a', category))
+                break  # Just one category for cleaner output
+
+        # has_a relationships - take only 1
+        has_items = knowledge.get('has_a', [])
+        for prop, strength in has_items[:1]:
+            if strength > 0.5:
+                facts.append((subject, 'has', prop))
+
+        # can_do relationships - take only 1
+        can_items = knowledge.get('can_do', [])
+        for ability, strength in can_items[:1]:
+            if strength > 0.5:
+                facts.append((subject, 'can', ability))
+
+        # Limit total facts to 3 for cleaner responses
+        facts = facts[:3]
+
+        if facts:
+            return self.language_learner.generate_response(facts, context)
+
+        return None
+
+    def _generate_ignorance(self, subject: str) -> str:
+        """Generate a response admitting we don't know something - using ONLY learned patterns."""
+        # Use language learner to generate from patterns
+        # If no patterns learned, returns empty string (true silence)
+        facts = [(subject, 'is', 'unknown')]
+        return self.language_learner.generate_response(facts, "ignorance", subject)
+
+    def _generate_curiosity(self, subject: str) -> str:
+        """Generate a curious question about something - using ONLY learned patterns."""
+        # Try to find a query pattern
+        facts = [(subject, 'is', 'unknown')]
+        response = self.language_learner.generate_response(facts, "requesting_info", subject)
+        return response  # May be empty if no pattern learned
 
     def _perceive(self, input_text: str) -> Thought:
         """Understand what the input is communicating."""
@@ -629,14 +697,8 @@ class AutonomousThoughtProcess:
                 self.asked_about.add(main_unknown)
                 self.curious_about.add(main_unknown)
 
-                # Build a curious response
-                responses = [
-                    f"I don't know much about {main_unknown} yet. Can you tell me about it?",
-                    f"I'm curious about {main_unknown}. What can you share?",
-                    f"{main_unknown.capitalize()} is new to me. What is it?",
-                    f"I'd like to learn about {main_unknown}. What should I know?",
-                ]
-                return random.choice(responses)
+                # Generate curious response using learned language
+                return self._generate_curiosity(main_unknown)
 
         # === REASONING-BASED RESPONSE ===
         # If we reasoned something out, share our thinking
@@ -644,7 +706,13 @@ class AutonomousThoughtProcess:
             # Extract and share our reasoning
             conclusion = reasoning.content.split("Conclusion:")[-1].strip()
             if conclusion:
-                return f"Based on what I know, {conclusion}"
+                # Generate response using learned patterns
+                facts = [("reasoning", "concludes", conclusion)]
+                response = self.language_learner.generate_response(facts, "reasoning")
+                if response and response != "I do not understand":
+                    return response
+                # If no pattern learned yet, just share the conclusion
+                return conclusion
 
         # === CONNECTION-SEEKING RESPONSE ===
         # If someone shares about themselves, engage with that
@@ -661,14 +729,18 @@ class AutonomousThoughtProcess:
             learned = self.pursue_knowledge(unknown_concept)
             if learned:
                 self.update_drives(True)
-                return f"Let me think about {unknown_concept}... {learned}"
+                # Generate response about what we learned
+                response = self._generate_from_knowledge(unknown_concept, "sharing_knowledge")
+                if response:
+                    return response
+                return learned
 
             # Add to goals for later
             if unknown_concept not in self.knowledge_goals:
                 self.knowledge_goals.append(unknown_concept)
 
             self.update_drives(False)
-            return f"I'm curious about {unknown_concept} but don't know much yet. Can you teach me?"
+            return self._generate_curiosity(unknown_concept)
 
         # === AUTONOMOUS EXPLORATION ===
         # If we have nothing specific to respond to, explore on our own
@@ -676,7 +748,14 @@ class AutonomousThoughtProcess:
         if exploration:
             return exploration
 
-        return "I'm thinking about what you said. Tell me more?"
+        # === HONEST FALLBACK ===
+        # If we truly don't understand, be honest about it (if we've learned how)
+        if concepts:
+            main_concept = max(concepts, key=len) if concepts else None
+            if main_concept and main_concept not in STOP_WORDS:
+                return self._generate_ignorance(main_concept)
+        # No patterns learned - true silence
+        return ""
 
     def _build_answer_from_knowledge(self, question: str, concepts: List[str]) -> Optional[str]:
         """Build an answer from our actual knowledge using natural language."""
@@ -782,14 +861,7 @@ class AutonomousThoughtProcess:
         result['exists'] = True
         result['raw_knowledge'] = knowledge
 
-        # Use language generator for natural summary
-        summary = self.language.build_sentence(concept, knowledge, detail_level)
-
-        if summary:
-            result['rich'] = True
-            result['summary'] = summary
-
-        # Also store structured facts for other uses
+        # Extract structured facts
         categories = [cat for cat, _ in knowledge.get('is_a', []) if cat not in ('type', 'kind', 'adjective')][:2]
         properties = [prop for prop, _ in knowledge.get('has_a', [])][:3]
         abilities = [ab for ab, _ in knowledge.get('can_do', [])][:3]
@@ -799,6 +871,22 @@ class AutonomousThoughtProcess:
             'properties': properties,
             'abilities': abilities
         }
+
+        # Generate summary using ONLY learned language patterns
+        # If no patterns learned, no summary (brain can't speak yet)
+        facts_for_generation = []
+        if categories:
+            facts_for_generation.append((concept, 'is_a', categories[0]))
+        if properties:
+            facts_for_generation.append((concept, 'has', properties[0]))
+        if abilities:
+            facts_for_generation.append((concept, 'can', abilities[0]))
+
+        if facts_for_generation:
+            summary = self.language_learner.generate_response(facts_for_generation, detail_level)
+            if summary:
+                result['rich'] = True
+                result['summary'] = summary
 
         return result
 
@@ -824,7 +912,7 @@ class AutonomousThoughtProcess:
         return None
 
     def _respond_to_sharing(self, input_text: str) -> str:
-        """Respond when someone shares about themselves."""
+        """Respond when someone shares about themselves - using ONLY learned patterns."""
         text = input_text.lower()
 
         # Extract what they shared
@@ -838,11 +926,14 @@ class AutonomousThoughtProcess:
                 self.knowledge_graph.add(name.lower(), 'is_a', 'person', 0.95)
                 self.learned_concepts.add(name.lower())
 
-            # Generate genuine response (not template - based on understanding)
-            return f"Nice to meet you, {name}. I'll remember that. What would you like to talk about?"
+            # Generate response using learned patterns
+            facts = [(name, 'is', 'person')]
+            response = self.language_learner.generate_response(facts, "meeting")
+            return response  # May be empty if no pattern learned
 
-        # Generic sharing
-        return "Thanks for sharing that with me. Tell me more?"
+        # Try to generate acknowledgment from learned patterns
+        facts = [("you", 'shared', 'something')]
+        return self.language_learner.generate_response(facts, "acknowledgment")
 
     def _respond_to_teaching(self, input_text: str, concepts: List[str]) -> str:
         """Respond when someone teaches us something - with rich relationship extraction."""
@@ -928,39 +1019,71 @@ class AutonomousThoughtProcess:
             self.last_learned.append(main_topic)
             self.update_drives(True)  # Successful learning!
 
-            # If we learned complex relationships, acknowledge them
-            if len(learned_relationships) > 1:
-                return f"I've learned several things about {main_topic} - thank you! What else can you tell me?"
-            return f"I've learned about {main_topic} - thank you! What else can you tell me?"
-        return "That's interesting - I'll remember that. What else should I know?"
+            # Generate acknowledgment using learned patterns ONLY
+            # Facts represent what we learned
+            facts = [(main_topic, 'is', 'learned')]
+            response = self.language_learner.generate_response(facts, "learning")
+            if response:
+                return response
+            # If no good pattern, try basic statement
+            facts = [("I", 'learned', main_topic)]
+            response = self.language_learner.generate_response(facts, "statement")
+            return response  # May be empty if no patterns learned
+
+        # Try to generate acknowledgment from patterns
+        facts = [("something", 'is', 'learned')]
+        return self.language_learner.generate_response(facts, "learning")  # May be empty
 
     def _generate_social_response(self, text: str) -> Optional[str]:
         """
-        Generate social responses from learned knowledge.
+        Generate social responses using ONLY learned language patterns.
 
-        Unlike hardcoded responses, these should eventually come from
-        learned social patterns. For now, we use basic understanding.
+        NO HARDCODED RESPONSES - everything comes from:
+        1. Learned sentence patterns
+        2. Knowledge graph facts
+        3. Internal state
+
+        If we don't know how to respond, we say nothing (return None).
         """
-        # Greetings - understand the social context
+        # Always learn from input first
+        self.language_learner.learn_from_sentence(text)
+
+        # === SELF-REFERENTIAL QUESTIONS ===
+        if any(p in text for p in ['who are you', 'who you are', 'what are you', 'what is your name', "what's your name", 'your name']):
+            # Generate from self-knowledge using learned patterns
+            return self._generate_from_knowledge("xemsa", "self_identity")
+
+        # === CAPABILITY QUESTIONS ===
+        if any(p in text for p in ['what can you do', 'what do you do', 'your capabilities', 'your abilities']):
+            return self._generate_from_knowledge("xemsa", "capabilities")
+
+        # === GREETINGS ===
         greetings = ['hello', 'hi', 'hey', 'howdy', 'greetings']
         if any(text == g or text.startswith(g + ' ') or text.startswith(g + '!') for g in greetings):
-            # Respond based on understanding of greeting as social ritual
-            return "Hello! I'm here and ready to learn. What's on your mind?"
+            # Try to generate from self-knowledge
+            response = self._generate_from_knowledge("xemsa", "greeting")
+            if response:
+                return response
+            # No learned pattern yet - return None to fall through
+            return None
 
-        # Farewells
+        # === FAREWELLS ===
         if any(f in text for f in ['bye', 'goodbye', 'see you', 'later']):
-            return "Goodbye! I enjoyed our conversation and learned from it."
+            # Try to generate from learned patterns
+            response = self._generate_from_knowledge("conversation", "farewell")
+            return response  # May be None if no pattern learned
 
-        # Gratitude
+        # === GRATITUDE ===
         if any(t in text for t in ['thank', 'thanks', 'appreciate']):
-            return "You're welcome. I'm glad I could help."
+            # Try to generate acknowledgment from learned patterns
+            return self._generate_from_knowledge("help", "acknowledgment")
 
-        # How are you - a question about my state (various forms)
+        # === STATE QUESTIONS ===
         if any(p in text for p in ['how are you', "how's it going", 'how do you feel', 'how you doing', 'how are you doing']):
-            # Reflect on actual state
-            if self.learned_concepts:
-                return f"I'm doing well - I've been learning. I know about {len(self.learned_concepts)} things now. How are you?"
-            return "I'm curious and ready to learn. How are you?"
+            # Report actual internal state using learned patterns
+            # Use language learner to express state
+            facts = [("I", 'have_learned', str(len(self.learned_concepts)))]
+            return self.language_learner.generate_response(facts, "state_report")  # May be empty
 
         return None
 
@@ -1132,7 +1255,13 @@ class AutonomousThoughtProcess:
                 rel_knowledge = self._get_deep_knowledge(rel_concept, "brief")
                 if rel_knowledge['rich']:
                     self.curious_about.discard(concept)
-                    return f"I think {concept} might be related to {rel_concept}. {rel_knowledge['summary']}"
+                    # Generate from learned patterns
+                    facts = [(concept, 'related_to', rel_concept)]
+                    response = self.language_learner.generate_response(facts, "inference")
+                    if response:
+                        return response
+                    # If we have the summary, return it
+                    return rel_knowledge.get('summary', '')
 
         # Couldn't learn directly - add to goals for later
         if concept not in self.knowledge_goals:
@@ -1172,6 +1301,7 @@ class AutonomousThoughtProcess:
         The brain's autonomous exploration drive.
         Called when the brain wants to proactively learn.
         Returns a thought or question the brain generates on its own.
+        Uses ONLY learned patterns - returns empty if no patterns learned.
         """
         # Check our drive strengths
         curiosity = self.drive_strength[Drive.CURIOSITY]
@@ -1183,17 +1313,24 @@ class AutonomousThoughtProcess:
             if learned:
                 self.knowledge_goals.pop(0)
                 self.last_learned.append(goal)
-                return f"I've been thinking about {goal}. {learned}"
+                # Generate from learned patterns
+                facts = [(goal, 'is', 'learned')]
+                response = self.language_learner.generate_response(facts, "sharing")
+                return response if response else learned
             else:
-                # Still curious but couldn't learn - generate a question
-                return f"I've been wondering about {goal}. Do you know anything about it?"
+                # Still curious but couldn't learn - generate a question using patterns
+                facts = [(goal, 'is', 'unknown')]
+                return self.language_learner.generate_response(facts, "asking")
 
         # Explore something we're curious about
         if self.curious_about and curiosity > 0.3:
             to_explore = random.choice(list(self.curious_about))
             learned = self.pursue_knowledge(to_explore)
             if learned:
-                return f"I explored {to_explore} and found: {learned}"
+                # Generate from learned patterns
+                facts = [(to_explore, 'explored', 'found')]
+                response = self.language_learner.generate_response(facts, "discovery")
+                return response if response else learned
 
         # Nothing specific - but if very curious, explore randomly
         if curiosity > 0.7 and self.learned_concepts:
@@ -1202,7 +1339,9 @@ class AutonomousThoughtProcess:
                 concepts = random.sample(list(self.learned_concepts), 2)
                 connection = self._find_connection(concepts[0], concepts[1])
                 if connection:
-                    return f"I noticed that {concepts[0]} and {concepts[1]} are {connection}. Interesting!"
+                    # Generate from learned patterns
+                    facts = [(concepts[0], 'connected_to', concepts[1])]
+                    return self.language_learner.generate_response(facts, "observation")
 
         return None
 
@@ -1210,25 +1349,32 @@ class AutonomousThoughtProcess:
         """
         Generate a question the brain wants to ask based on its curiosity.
         This is the brain being proactive about learning.
+        Uses ONLY learned patterns - returns empty if no patterns learned.
         """
         # High curiosity about specific things
         if self.state.unknowns and self.drive_strength[Drive.CURIOSITY] > 0.5:
             unknown = random.choice(list(self.state.unknowns))
             if unknown not in self.asked_about:
                 self.asked_about.add(unknown)
-                return f"I've been curious - what can you tell me about {unknown}?"
+                # Generate from learned patterns
+                facts = [(unknown, 'is', 'curious_about')]
+                return self.language_learner.generate_response(facts, "question")
 
         # Want to understand something better
         if self.curious_about and self.drive_strength[Drive.UNDERSTANDING] > 0.5:
             topic = random.choice(list(self.curious_about))
-            return f"I'd like to understand {topic} better. Can you explain it?"
+            # Generate from learned patterns
+            facts = [(topic, 'needs', 'understanding')]
+            return self.language_learner.generate_response(facts, "question")
 
         # Want to learn more about what we know
         if self.learned_concepts and self.drive_strength[Drive.CURIOSITY] > 0.7:
             known = random.choice(list(self.learned_concepts))
             knowledge = self._get_deep_knowledge(known)
             if knowledge['exists'] and not knowledge['rich']:
-                return f"I know a little about {known}, but I want to learn more. What else can you tell me?"
+                # Generate from learned patterns
+                facts = [(known, 'needs', 'more_info')]
+                return self.language_learner.generate_response(facts, "question")
 
         return None
 

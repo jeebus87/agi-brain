@@ -124,7 +124,7 @@ def create_new_chat(title: Optional[str] = None) -> dict:
     now = datetime.now().isoformat()
     chat_data = {
         'id': chat_id,
-        'title': title or f"Chat {chat_id}",
+        'title': title or "New Chat",
         'created_at': now,
         'updated_at': now,
         'messages': []
@@ -481,14 +481,16 @@ async def startup_event():
         brain.initialize()
         print("Started with fresh brain")
 
-        # Auto-load dictionary if brain has few words
-        if brain.semantic_memory.get_vocabulary_size() < 100:
-            print("Loading dictionary vocabulary...")
-            from src.language.dictionary_loader import DictionaryLoader
-            loader = DictionaryLoader()
-            stats = loader.load_into_brain(brain, use_wordnet=loader.wordnet_available)
-            print(f"Loaded {stats['words_loaded']} words, {stats['associations_created']} associations")
-            brain.save(str(BRAIN_DIR / "default"))
+    # Auto-load dictionary if brain has insufficient vocabulary
+    # This ensures both fresh brains AND under-populated brains get proper vocabulary
+    vocab_size = brain.semantic_memory.get_vocabulary_size()
+    if vocab_size < 600:
+        print(f"Vocabulary too small ({vocab_size}), loading dictionary...")
+        from src.language.dictionary_loader import DictionaryLoader
+        loader = DictionaryLoader()
+        stats = loader.load_into_brain(brain, use_wordnet=loader.wordnet_available)
+        print(f"Loaded {stats['words_loaded']} words, {stats['associations_created']} associations")
+        brain.save(str(BRAIN_DIR / "default"))
 
     # Load most recent chat if exists
     chats = list_chats()

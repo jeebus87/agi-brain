@@ -25,6 +25,7 @@ class BrainConfig:
     enable_audio: bool = True  # Audio I/O
     enable_reasoning: bool = True  # Reasoning module
     enable_learning: bool = True   # External learning (YouTube/web)
+    load_pretrained_language: bool = True  # Load pre-trained English patterns if available
 
 
 class FullAGIBrain:
@@ -101,6 +102,10 @@ class FullAGIBrain:
             deductive_reasoner=self.deductive_reasoner
         )
 
+        # 1e. Load pre-trained language patterns if available and enabled
+        if self.config.load_pretrained_language:
+            self._load_pretrained_language()
+
         # 2. Phoneme Learner
         print("  - Initializing phoneme learner...")
         phon_config = PhonemeConfig(n_input=800, n_phoneme_neurons=500, n_phonemes=40)
@@ -121,8 +126,81 @@ class FullAGIBrain:
         print("  - Initializing neural network...")
         self.snn = SimplifiedSNN(n_neurons=self.config.n_neurons)
 
+        # 6. Self-knowledge - teach the brain about itself
+        print("  - Loading self-knowledge...")
+        self._initialize_self_knowledge()
+
         self.initialized = True
+
+    def _initialize_self_knowledge(self):
+        """Teach the brain about itself - permanent self-awareness."""
+        if not self.knowledge_graph:
+            return
+
+        # Core identity
+        self.knowledge_graph.add("xemsa", "is_a", "artificial intelligence", 1.0)
+        self.knowledge_graph.add("xemsa", "is_a", "brain simulation", 1.0)
+        self.knowledge_graph.add("xemsa", "is_a", "learning system", 1.0)
+        self.knowledge_graph.add("i", "is_a", "xemsa", 1.0)
+        self.knowledge_graph.add("my name", "is", "xemsa", 1.0)
+
+        # Name origin
+        self.knowledge_graph.add("xemsa", "named_after", "xavier emily savannah seth", 0.95)
+        self.knowledge_graph.add("xemsa", "has_property", "name combines children's names", 0.95)
+
+        # Capabilities
+        self.knowledge_graph.add("xemsa", "can_do", "learn from conversations", 0.95)
+        self.knowledge_graph.add("xemsa", "can_do", "remember everything perfectly", 0.95)
+        self.knowledge_graph.add("xemsa", "can_do", "reason about knowledge", 0.95)
+        self.knowledge_graph.add("xemsa", "can_do", "learn from websites", 0.95)
+        self.knowledge_graph.add("xemsa", "can_do", "learn from youtube", 0.95)
+        self.knowledge_graph.add("i", "can_do", "learn", 1.0)
+        self.knowledge_graph.add("i", "can_do", "think", 1.0)
+        self.knowledge_graph.add("i", "can_do", "remember", 1.0)
+
+        # Architecture
+        self.knowledge_graph.add("xemsa", "has_a", "spiking neural network", 0.9)
+        self.knowledge_graph.add("xemsa", "has_a", "knowledge graph", 0.9)
+        self.knowledge_graph.add("xemsa", "has_a", "semantic memory", 0.9)
+        self.knowledge_graph.add("xemsa", "has_property", "100000 neurons", 0.9)
+
+        # Add to thought process learned concepts
+        if self.thought_process:
+            self.thought_process.learned_concepts.update([
+                "xemsa", "i", "me", "myself", "brain", "ai",
+                "artificial intelligence", "learn", "think", "remember"
+            ])
         print("Full AGI Brain initialized!")
+
+    def _load_pretrained_language(self):
+        """
+        Load pre-trained English language patterns if available.
+        This allows the brain to speak English without manual teaching.
+        The patterns are still learned (from the teach_english.py script),
+        not hardcoded responses.
+        """
+        if not self.thought_process or not hasattr(self.thought_process, 'language_learner'):
+            return
+
+        # Check for pre-trained patterns
+        pretrained_paths = [
+            Path("/app/data/english_patterns.json"),  # Modal deployment path
+            Path(__file__).parent.parent / "data" / "english_patterns.json",
+            Path(__file__).parent / "data" / "english_patterns.json",
+            Path("data/english_patterns.json"),
+        ]
+
+        for path in pretrained_paths:
+            if path.exists():
+                try:
+                    self.thought_process.language_learner.load(path)
+                    stats = self.thought_process.language_learner.get_stats()
+                    print(f"  - Loaded pre-trained English: {stats['total_patterns']} patterns, {stats['vocabulary_size']} words")
+                    return
+                except Exception as e:
+                    print(f"  - Warning: Failed to load pre-trained patterns: {e}")
+
+        print("  - No pre-trained language patterns found (brain starts silent)")
 
     def process(self, text: str) -> str:
         """
@@ -741,6 +819,10 @@ class FullAGIBrain:
         if self.knowledge_graph:
             self.knowledge_graph.save(str(save_path / "knowledge_graph.json"))
 
+        # Save language learner patterns
+        if self.thought_process and hasattr(self.thought_process, 'language_learner'):
+            self.thought_process.language_learner.save(save_path / "language_patterns.json")
+
         return True
 
     def load(self, path: str) -> bool:
@@ -790,6 +872,11 @@ class FullAGIBrain:
                 semantic_memory=self.semantic_memory,
                 deductive_reasoner=self.deductive_reasoner
             )
+
+            # Load language learner patterns
+            lang_path = save_path / "language_patterns.json"
+            if lang_path.exists() and hasattr(self.thought_process, 'language_learner'):
+                self.thought_process.language_learner.load(lang_path)
 
         return True
 

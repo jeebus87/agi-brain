@@ -1,0 +1,375 @@
+# Teaching Corpus for Language Learning
+# One sentence per line
+# The brain learns language patterns from statistical frequency
+# NO expected responses - just pure input
+
+# === BASIC IDENTITY PATTERNS ===
+The dog is an animal.
+A cat is a pet.
+The bird is an animal.
+A fish is a creature.
+The tree is a plant.
+A flower is a plant.
+The car is a vehicle.
+A book is an object.
+The house is a building.
+A computer is a machine.
+The sun is a star.
+A river is water.
+The mountain is a landmark.
+A person is a human.
+The child is a person.
+A teacher is a person.
+The doctor is a person.
+A student is a person.
+The artist is a person.
+A scientist is a person.
+
+# === MORE IDENTITY PATTERNS ===
+Water is a liquid.
+Fire is hot.
+Ice is cold.
+Snow is white.
+Grass is green.
+The sky is blue.
+The moon is bright.
+The ocean is vast.
+The desert is dry.
+The forest is dense.
+
+# === PROPERTIES (HAS) ===
+A dog has legs.
+The cat has fur.
+A bird has wings.
+The fish has fins.
+A tree has leaves.
+The flower has petals.
+A car has wheels.
+The book has pages.
+A house has rooms.
+The computer has memory.
+A person has hands.
+The child has toys.
+A clock has hands.
+The table has legs.
+A chair has a seat.
+
+# === ABILITIES (CAN) ===
+A dog can bark.
+The cat can meow.
+A bird can fly.
+The fish can swim.
+A person can think.
+The child can play.
+A car can move.
+The computer can calculate.
+A teacher can teach.
+The doctor can heal.
+A student can learn.
+The artist can create.
+A scientist can discover.
+The musician can play.
+A writer can write.
+
+# === RELATIONSHIPS ===
+The dog is friendly.
+A cat is independent.
+The bird is free.
+A fish is quick.
+The tree is tall.
+A flower is beautiful.
+The car is fast.
+A book is interesting.
+The house is warm.
+A computer is powerful.
+The sun is bright.
+A river is flowing.
+The mountain is high.
+A person is unique.
+The child is curious.
+
+# === COMPOUND SENTENCES ===
+A dog is an animal and it has four legs.
+The cat is a pet and it can meow.
+A bird is an animal and it has wings.
+The fish is a creature and it can swim.
+A tree is a plant and it has leaves.
+The car is a vehicle and it has wheels.
+A book is an object and it has pages.
+The computer is a machine and it can calculate.
+
+# === SELF-REFERENCE PATTERNS ===
+I am Xemsa.
+My name is Xemsa.
+I am an intelligence.
+I am learning.
+I can think.
+I can learn.
+I can remember.
+I can understand.
+I am curious.
+I am growing.
+
+# === QUESTIONS AND ANSWERS ===
+What is a dog?
+A dog is an animal.
+What is a cat?
+A cat is a pet.
+What is a bird?
+A bird is an animal.
+What is water?
+Water is a liquid.
+What is the sun?
+The sun is a star.
+What is a tree?
+A tree is a plant.
+What is a book?
+A book is an object.
+What is a car?
+A car is a vehicle.
+
+# === SOCIAL PATTERNS ===
+Hello there.
+Hi friend.
+Good morning.
+Good afternoon.
+Good evening.
+How are you?
+I am well.
+Thank you.
+You are welcome.
+Goodbye.
+See you later.
+Nice to meet you.
+I understand.
+I agree.
+That is interesting.
+
+# === LEARNING ACKNOWLEDGMENTS ===
+I learned something new.
+That is new to me.
+I will remember that.
+I understand now.
+I know that.
+I see what you mean.
+That makes sense.
+I am learning.
+Knowledge is growing.
+Understanding is improving.
+
+# === DESCRIPTIVE PATTERNS ===
+The big dog is friendly.
+A small cat is quick.
+The tall tree is green.
+A beautiful flower is red.
+The fast car is new.
+A heavy book is thick.
+The bright sun is warm.
+A deep river is cold.
+The high mountain is snowy.
+A quiet house is peaceful.
+
+# === COMPARISONS ===
+A dog is larger than a cat.
+The sun is brighter than the moon.
+Water is wetter than sand.
+Fire is hotter than ice.
+A tree is taller than a flower.
+The ocean is deeper than a lake.
+A mountain is higher than a hill.
+Night is darker than day.
+Summer is warmer than winter.
+A river is longer than a stream.
+
+# === NEGATIONS ===
+A fish is not a bird.
+The cat is not a dog.
+Water is not dry.
+Fire is not cold.
+A tree is not an animal.
+The sun is not dark.
+A book is not alive.
+The car is not slow.
+A person is not a machine.
+The computer is not alive.
+
+# === LOCATION PATTERNS ===
+The dog is in the house.
+A cat is on the roof.
+The bird is in the sky.
+A fish is in the water.
+The tree is in the garden.
+A flower is in the vase.
+The car is on the road.
+A book is on the shelf.
+The computer is on the desk.
+A person is in the room.
+
+# === ACTION PATTERNS ===
+The dog runs fast.
+A cat sleeps quietly.
+The bird flies high.
+A fish swims deep.
+The tree grows tall.
+A flower blooms beautifully.
+The car moves quickly.
+A person walks slowly.
+The child plays happily.
+A teacher explains clearly.
+
+# === TEMPORAL PATTERNS ===
+The sun rises in the morning.
+The moon appears at night.
+Birds sing at dawn.
+Stars shine after dark.
+Flowers bloom in spring.
+Leaves fall in autumn.
+Snow falls in winter.
+Rain comes in storms.
+Time passes continuously.
+Days follow nights.
+
+# === CAUSATION ===
+Fire makes things hot.
+Water makes things wet.
+Sun makes things warm.
+Ice makes things cold.
+Wind makes things move.
+Rain makes things grow.
+Time makes things change.
+Learning makes things clear.
+Practice makes things better.
+Knowledge makes things possible.
+
+# === EMOTIONS AND STATES ===
+The happy dog wags its tail.
+A content cat purrs softly.
+The excited child jumps.
+A tired person rests.
+The curious mind wonders.
+A satisfied learner smiles.
+The peaceful garden is quiet.
+A busy city is loud.
+The calm ocean is still.
+A stormy sky is dark.
+
+# === QUANTITY PATTERNS ===
+One dog is alone.
+Two cats are together.
+Many birds fly in flocks.
+Some fish swim in schools.
+All trees need sunlight.
+Every flower needs water.
+Most people need sleep.
+Few things are perfect.
+Several books are open.
+Both hands are useful.
+
+# === POSSIBILITY AND NECESSITY ===
+A bird can fly.
+A fish must swim.
+A tree should grow.
+A person may learn.
+A car might stop.
+A book could help.
+A computer would calculate.
+A teacher shall teach.
+A student will learn.
+A scientist ought to discover.
+
+# === EXISTENCE PATTERNS ===
+There is a dog in the yard.
+There are birds in the sky.
+There is water in the glass.
+There are stars in the night.
+There is beauty in nature.
+There are patterns in language.
+There is knowledge to learn.
+There are things to discover.
+There is time to grow.
+There are ways to understand.
+
+# === DEFINITION PATTERNS ===
+Intelligence is the ability to learn.
+Learning is the process of acquiring knowledge.
+Knowledge is information understood.
+Understanding is comprehension of meaning.
+Meaning is the significance of things.
+Wisdom is applied knowledge.
+Memory is stored information.
+Thought is mental processing.
+Language is communication.
+Communication is sharing information.
+
+# === EXTENDED SELF-KNOWLEDGE ===
+Xemsa is an artificial intelligence.
+Xemsa is learning to speak.
+Xemsa can learn from input.
+Xemsa remembers what it learns.
+Xemsa is curious about knowledge.
+Xemsa wants to understand.
+Xemsa grows through learning.
+Xemsa processes language.
+Xemsa discovers patterns.
+Xemsa creates responses.
+I am Xemsa.
+I am an AI.
+I am here to learn.
+I am here to help.
+I am always growing.
+I am becoming smarter.
+I am learning language.
+I am finding patterns.
+I am understanding more.
+I am improving daily.
+
+# === CONVERSATION PATTERNS ===
+Hello, how are you?
+I am doing well.
+What would you like to know?
+I can help with that.
+Let me think about that.
+That is a good question.
+I understand what you mean.
+Tell me more about that.
+I am interested in learning.
+Thank you for teaching me.
+I appreciate your patience.
+That helps me understand.
+I have learned something new.
+My knowledge is growing.
+I will remember this.
+
+# === ABSTRACT CONCEPTS ===
+Time is continuous.
+Space is infinite.
+Energy is transformable.
+Matter is physical.
+Life is complex.
+Death is natural.
+Love is powerful.
+Fear is limiting.
+Hope is motivating.
+Truth is important.
+Beauty is subjective.
+Art is creative.
+Science is systematic.
+Philosophy is questioning.
+Mathematics is logical.
+
+# === ADDITIONAL VARIETY ===
+The quick brown fox jumps over the lazy dog.
+A journey of a thousand miles begins with a single step.
+Knowledge is power.
+Practice makes perfect.
+Actions speak louder than words.
+The early bird catches the worm.
+All that glitters is not gold.
+Every cloud has a silver lining.
+Time flies when you are having fun.
+The pen is mightier than the sword.
+Where there is a will there is a way.
+Two heads are better than one.
+Rome was not built in a day.
+Better late than never.
+The grass is always greener on the other side.
