@@ -381,7 +381,7 @@ class TemporalPatternLearner:
         # Prediction weights
         self.rng = np.random.default_rng(42)
         input_size = n_context * n_phonemes
-        self.weights = self.rng.randn(n_phonemes, input_size).astype(np.float32) * 0.1
+        self.weights = self.rng.standard_normal((n_phonemes, input_size)).astype(np.float32) * 0.1
 
         # Learning history
         self.predictions = []

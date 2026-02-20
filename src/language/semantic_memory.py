@@ -128,7 +128,7 @@ class ConceptNode:
         self.rng = np.random.default_rng(seed or concept_id)
 
         # Distributed representation
-        self.vector = self.rng.randn(vector_size).astype(np.float32)
+        self.vector = self.rng.standard_normal(vector_size).astype(np.float32)
         self.vector /= np.linalg.norm(self.vector)
 
         # Labels and forms

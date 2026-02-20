@@ -22,6 +22,9 @@
             --border: #424242;
             --user-bg: #2f2f2f;
             --assistant-bg: transparent;
+            --danger: #ef4444;
+            --danger-hover: #dc2626;
+            --warning: #f59e0b;
         }
 
         body {
@@ -35,7 +38,7 @@
 
         /* Sidebar */
         .sidebar {
-            width: 260px;
+            width: 280px;
             background-color: var(--bg-secondary);
             display: flex;
             flex-direction: column;
@@ -81,9 +84,22 @@
             color: var(--text-secondary);
             padding: 8px;
             text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .save-item {
+        .section-toggle {
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .section-toggle:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        .chat-item {
             padding: 10px 12px;
             border-radius: 8px;
             cursor: pointer;
@@ -91,15 +107,134 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 2px;
+            transition: background-color 0.15s;
         }
 
-        .save-item:hover {
+        .chat-item:hover {
             background-color: var(--bg-tertiary);
         }
 
-        .save-item-info {
-            font-size: 11px;
+        .chat-item.active {
+            background-color: var(--bg-tertiary);
+            border-left: 2px solid var(--accent);
+        }
+
+        .chat-item-title {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-right: 8px;
+        }
+
+        .chat-item-actions {
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+
+        .chat-item:hover .chat-item-actions {
+            opacity: 1;
+        }
+
+        .chat-action-btn {
+            padding: 4px;
+            border: none;
+            background: transparent;
             color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-action-btn:hover {
+            background-color: var(--border);
+            color: var(--text-primary);
+        }
+
+        .chat-action-btn.delete:hover {
+            color: var(--danger);
+        }
+
+        .chat-action-btn.restore:hover {
+            color: var(--accent);
+        }
+
+        .empty-state {
+            padding: 10px 12px;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 13px;
+        }
+
+        /* Trash section */
+        .trash-section {
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        .trash-header {
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .trash-header:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        .trash-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .trash-count {
+            background-color: var(--bg-tertiary);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+        }
+
+        .trash-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .trash-content.expanded {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .trash-actions {
+            padding: 8px 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .empty-trash-btn {
+            width: 100%;
+            padding: 8px;
+            background-color: transparent;
+            border: 1px solid var(--danger);
+            border-radius: 6px;
+            color: var(--danger);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .empty-trash-btn:hover {
+            background-color: var(--danger);
+            color: white;
         }
 
         .sidebar-footer {
@@ -357,6 +492,12 @@
             font-size: 18px;
         }
 
+        .modal p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
         .modal input {
             width: 100%;
             padding: 12px;
@@ -372,6 +513,42 @@
             display: flex;
             gap: 8px;
             justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .modal-btn.primary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .modal-btn.primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .modal-btn.secondary {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .modal-btn.secondary:hover {
+            background-color: var(--border);
+        }
+
+        .modal-btn.danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .modal-btn.danger:hover {
+            background-color: var(--danger-hover);
         }
 
         /* Typing indicator */
@@ -431,33 +608,67 @@
                 display: none;
             }
         }
+
+        /* Icons */
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
     </style>
 </head>
 <body>
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <button class="new-chat-btn" onclick="newBrain()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="new-chat-btn" onclick="newChat()">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 5v14M5 12h14"/>
                 </svg>
-                New Brain
+                New Chat
             </button>
         </div>
 
         <div class="sidebar-content">
             <div class="sidebar-section">
-                <div class="sidebar-section-title">Saved Brains</div>
-                <div id="saves-list">
-                    <div class="save-item" style="color: var(--text-secondary); font-style: italic;">
-                        No saved brains
-                    </div>
+                <div class="sidebar-section-title">
+                    <span>Recent Chats</span>
+                </div>
+                <div id="chats-list">
+                    <div class="empty-state">No chats yet</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trash Section -->
+        <div class="trash-section">
+            <div class="trash-header" onclick="toggleTrash()">
+                <div class="trash-header-left">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                    </svg>
+                    <span>Trash</span>
+                    <span class="trash-count" id="trash-count">0</span>
+                </div>
+                <svg class="icon" id="trash-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;">
+                    <path d="M6 9l6 6 6-6"/>
+                </svg>
+            </div>
+            <div class="trash-content" id="trash-content">
+                <div id="trash-list" style="padding: 0 8px;">
+                    <div class="empty-state">Trash is empty</div>
+                </div>
+                <div class="trash-actions" id="trash-actions" style="display: none;">
+                    <button class="empty-trash-btn" onclick="confirmEmptyTrash()">Empty Trash</button>
                 </div>
             </div>
         </div>
 
         <div class="sidebar-footer">
             <div class="status-box" id="status-box">
+                <div class="status-row">
+                    <span class="status-label">Neurons</span>
+                    <span class="status-value" id="neuron-count">100K</span>
+                </div>
                 <div class="status-row">
                     <span class="status-label">Vocabulary</span>
                     <span class="status-value" id="vocab-count">0</span>
@@ -467,8 +678,8 @@
                     <span class="status-value" id="concept-count">0</span>
                 </div>
                 <div class="status-row">
-                    <span class="status-label">Conversations</span>
-                    <span class="status-value" id="convo-count">0</span>
+                    <span class="status-label">Reasoning</span>
+                    <span class="status-value" id="reasoning-status">Enabled</span>
                 </div>
             </div>
         </div>
@@ -477,9 +688,10 @@
     <!-- Main content -->
     <main class="main">
         <header class="header">
-            <h1>AGI Brain</h1>
+            <h1 id="chat-title">AGI Brain</h1>
             <div class="header-actions">
-                <button class="header-btn secondary" onclick="showSaveModal()">Save Brain</button>
+                <button class="header-btn secondary" onclick="showLearnModal('url')">Learn from URL</button>
+                <button class="header-btn secondary" onclick="showLearnModal('youtube')">Learn YouTube</button>
             </div>
         </header>
 
@@ -487,7 +699,7 @@
             <div class="chat-content" id="chat-content">
                 <div class="welcome-message" id="welcome">
                     <h2>AGI Brain</h2>
-                    <p>I'm a neural network that learns language from scratch. I have no pre-trained knowledge - I learn entirely from our conversations. Teach me about the world!</p>
+                    <p>Full Cognitive Architecture with 100K spiking neurons, reasoning engine, and continuous learning. Start a conversation!</p>
                 </div>
             </div>
         </div>
@@ -503,24 +715,49 @@
                         oninput="autoResize(this)"
                     ></textarea>
                     <button class="send-btn" onclick="sendMessage()" id="send-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                         </svg>
                     </button>
                 </div>
-                <div class="input-hint">Brain learns from every message. Save before closing!</div>
+                <div class="input-hint">Brain learns and evolves from every message. All knowledge is preserved across chats.</div>
             </div>
         </div>
     </main>
 
-    <!-- Save Modal -->
-    <div class="modal-overlay" id="save-modal">
+    <!-- Learn Modal -->
+    <div class="modal-overlay" id="learn-modal">
         <div class="modal">
-            <h3>Save Brain</h3>
-            <input type="text" id="save-name" placeholder="Enter a name..." value="default">
+            <h3 id="learn-modal-title">Learn from URL</h3>
+            <p id="learn-modal-desc">Enter a URL to learn from its content</p>
+            <input type="text" id="learn-url" placeholder="https://example.com/article">
             <div class="modal-actions">
-                <button class="header-btn secondary" onclick="hideSaveModal()">Cancel</button>
-                <button class="header-btn" onclick="saveBrain()">Save</button>
+                <button class="modal-btn secondary" onclick="hideLearnModal()">Cancel</button>
+                <button class="modal-btn primary" onclick="learnFromSource()" id="learn-btn">Learn</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rename Modal -->
+    <div class="modal-overlay" id="rename-modal">
+        <div class="modal">
+            <h3>Rename Chat</h3>
+            <input type="text" id="rename-input" placeholder="Enter new title...">
+            <div class="modal-actions">
+                <button class="modal-btn secondary" onclick="hideRenameModal()">Cancel</button>
+                <button class="modal-btn primary" onclick="saveRename()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal">
+            <h3 id="confirm-title">Confirm Action</h3>
+            <p id="confirm-message">Are you sure?</p>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" onclick="hideConfirmModal()">Cancel</button>
+                <button class="modal-btn danger" onclick="confirmAction()" id="confirm-btn">Delete</button>
             </div>
         </div>
     </div>
@@ -531,6 +768,10 @@
     <script>
         // State
         let isLoading = false;
+        let currentChatId = null;
+        let renamingChatId = null;
+        let pendingConfirmAction = null;
+        let trashExpanded = false;
 
         // Auto-resize textarea
         function autoResize(el) {
@@ -552,17 +793,24 @@
             if (welcome) welcome.remove();
 
             const chatContent = document.getElementById('chat-content');
-            const avatar = role === 'user' ? '👤' : '🧠';
+            const avatar = role === 'user' ? '&#128100;' : '&#129504;';
 
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${role}`;
             messageDiv.innerHTML = `
                 <div class="message-avatar">${avatar}</div>
-                <div class="message-content">${content}</div>
+                <div class="message-content">${escapeHtml(content)}</div>
             `;
 
             chatContent.appendChild(messageDiv);
             scrollToBottom();
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         // Show typing indicator
@@ -572,7 +820,7 @@
             typingDiv.className = 'message assistant';
             typingDiv.id = 'typing';
             typingDiv.innerHTML = `
-                <div class="message-avatar">🧠</div>
+                <div class="message-avatar">&#129504;</div>
                 <div class="message-content">
                     <div class="typing-indicator">
                         <span></span><span></span><span></span>
@@ -621,6 +869,12 @@
                 const data = await response.json();
                 hideTyping();
                 addMessage('assistant', data.response);
+
+                // Update current chat ID and refresh list
+                if (data.chat_id) {
+                    currentChatId = data.chat_id;
+                }
+                loadChatsList();
                 updateStatus();
             } catch (error) {
                 hideTyping();
@@ -631,136 +885,327 @@
             isLoading = false;
         }
 
+        // Load chats list
+        async function loadChatsList() {
+            try {
+                const response = await fetch('/api/chats');
+                const data = await response.json();
+                const chats = data.chats || [];
+
+                const list = document.getElementById('chats-list');
+
+                if (chats.length === 0) {
+                    list.innerHTML = '<div class="empty-state">No chats yet</div>';
+                    return;
+                }
+
+                list.innerHTML = chats.map(chat => `
+                    <div class="chat-item ${chat.id === currentChatId ? 'active' : ''}"
+                         onclick="switchChat('${chat.id}')"
+                         data-chat-id="${chat.id}">
+                        <span class="chat-item-title">${escapeHtml(chat.title)}</span>
+                        <div class="chat-item-actions">
+                            <button class="chat-action-btn" onclick="event.stopPropagation(); showRenameModal('${chat.id}', '${escapeHtml(chat.title).replace(/'/g, "\\'")}')" title="Rename">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                                    <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                </svg>
+                            </button>
+                            <button class="chat-action-btn delete" onclick="event.stopPropagation(); deleteChat('${chat.id}')" title="Delete">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to load chats:', error);
+            }
+        }
+
+        // Load trash list
+        async function loadTrashList() {
+            try {
+                const response = await fetch('/api/trash');
+                const data = await response.json();
+                const chats = data.chats || [];
+
+                document.getElementById('trash-count').textContent = chats.length;
+
+                const list = document.getElementById('trash-list');
+                const actions = document.getElementById('trash-actions');
+
+                if (chats.length === 0) {
+                    list.innerHTML = '<div class="empty-state">Trash is empty</div>';
+                    actions.style.display = 'none';
+                    return;
+                }
+
+                actions.style.display = 'block';
+                list.innerHTML = chats.map(chat => `
+                    <div class="chat-item" data-chat-id="${chat.id}">
+                        <span class="chat-item-title">${escapeHtml(chat.title)}</span>
+                        <div class="chat-item-actions" style="opacity: 1;">
+                            <button class="chat-action-btn restore" onclick="restoreChat('${chat.id}')" title="Restore">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/>
+                                    <path d="M3 3v5h5"/>
+                                </svg>
+                            </button>
+                            <button class="chat-action-btn delete" onclick="permanentlyDeleteChat('${chat.id}')" title="Delete permanently">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 6L6 18M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to load trash:', error);
+            }
+        }
+
+        // Toggle trash section
+        function toggleTrash() {
+            trashExpanded = !trashExpanded;
+            const content = document.getElementById('trash-content');
+            const chevron = document.getElementById('trash-chevron');
+
+            if (trashExpanded) {
+                content.classList.add('expanded');
+                chevron.style.transform = 'rotate(180deg)';
+                loadTrashList();
+            } else {
+                content.classList.remove('expanded');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Switch chat
+        async function switchChat(chatId) {
+            if (chatId === currentChatId) return;
+
+            try {
+                const response = await fetch(`/api/chats/${chatId}/switch`, { method: 'POST' });
+                const data = await response.json();
+
+                if (data.switched) {
+                    currentChatId = chatId;
+                    const chat = data.chat;
+
+                    // Update title
+                    document.getElementById('chat-title').textContent = chat.title;
+
+                    // Clear and reload messages
+                    const chatContent = document.getElementById('chat-content');
+                    chatContent.innerHTML = '';
+
+                    if (chat.messages && chat.messages.length > 0) {
+                        chat.messages.forEach(msg => addMessage(msg.role, msg.content));
+                    } else {
+                        chatContent.innerHTML = `
+                            <div class="welcome-message" id="welcome">
+                                <h2>AGI Brain</h2>
+                                <p>Continue your conversation or start a new one.</p>
+                            </div>
+                        `;
+                    }
+
+                    // Update active state in list
+                    document.querySelectorAll('.chat-item').forEach(item => {
+                        item.classList.toggle('active', item.dataset.chatId === chatId);
+                    });
+                }
+            } catch (error) {
+                console.error('Failed to switch chat:', error);
+                showToast('Failed to switch chat');
+            }
+        }
+
+        // New chat
+        async function newChat() {
+            try {
+                const response = await fetch('/api/new', { method: 'POST' });
+                const data = await response.json();
+
+                if (data.chat) {
+                    currentChatId = data.chat.id;
+
+                    // Update UI
+                    document.getElementById('chat-title').textContent = 'New Chat';
+                    document.getElementById('chat-content').innerHTML = `
+                        <div class="welcome-message" id="welcome">
+                            <h2>AGI Brain</h2>
+                            <p>New conversation started. All knowledge preserved: ${data.vocabulary || 0} words, ${data.knowledge_facts || 0} facts.</p>
+                        </div>
+                    `;
+
+                    loadChatsList();
+                    updateStatus();
+                    showToast('New chat created');
+                }
+            } catch (error) {
+                console.error('Failed to create chat:', error);
+                showToast('Failed to create new chat');
+            }
+        }
+
+        // Delete chat (move to trash)
+        async function deleteChat(chatId) {
+            try {
+                const response = await fetch(`/api/chats/${chatId}`, { method: 'DELETE' });
+                const data = await response.json();
+
+                if (data.deleted) {
+                    showToast('Chat moved to trash');
+
+                    // If this was the current chat, create a new one
+                    if (chatId === currentChatId) {
+                        await newChat();
+                    } else {
+                        loadChatsList();
+                    }
+
+                    loadTrashList();
+                }
+            } catch (error) {
+                console.error('Failed to delete chat:', error);
+                showToast('Failed to delete chat');
+            }
+        }
+
+        // Restore chat from trash
+        async function restoreChat(chatId) {
+            try {
+                const response = await fetch(`/api/trash/${chatId}/restore`, { method: 'POST' });
+                const data = await response.json();
+
+                if (data.restored) {
+                    showToast('Chat restored');
+                    loadChatsList();
+                    loadTrashList();
+                }
+            } catch (error) {
+                console.error('Failed to restore chat:', error);
+                showToast('Failed to restore chat');
+            }
+        }
+
+        // Permanently delete chat
+        async function permanentlyDeleteChat(chatId) {
+            pendingConfirmAction = async () => {
+                try {
+                    const response = await fetch(`/api/trash/${chatId}`, { method: 'DELETE' });
+                    const data = await response.json();
+
+                    if (data.permanently_deleted) {
+                        showToast('Chat permanently deleted');
+                        loadTrashList();
+                    }
+                } catch (error) {
+                    console.error('Failed to delete chat:', error);
+                    showToast('Failed to delete chat');
+                }
+            };
+
+            document.getElementById('confirm-title').textContent = 'Permanently Delete';
+            document.getElementById('confirm-message').textContent = 'This chat will be permanently deleted and cannot be recovered.';
+            document.getElementById('confirm-btn').textContent = 'Delete Forever';
+            document.getElementById('confirm-modal').classList.add('active');
+        }
+
+        // Confirm empty trash
+        function confirmEmptyTrash() {
+            pendingConfirmAction = async () => {
+                try {
+                    const response = await fetch('/api/trash', { method: 'DELETE' });
+                    const data = await response.json();
+
+                    if (data.emptied) {
+                        showToast(`Deleted ${data.count} chat(s)`);
+                        loadTrashList();
+                    }
+                } catch (error) {
+                    console.error('Failed to empty trash:', error);
+                    showToast('Failed to empty trash');
+                }
+            };
+
+            document.getElementById('confirm-title').textContent = 'Empty Trash';
+            document.getElementById('confirm-message').textContent = 'All chats in trash will be permanently deleted. This cannot be undone.';
+            document.getElementById('confirm-btn').textContent = 'Empty Trash';
+            document.getElementById('confirm-modal').classList.add('active');
+        }
+
+        // Confirm action
+        function confirmAction() {
+            hideConfirmModal();
+            if (pendingConfirmAction) {
+                pendingConfirmAction();
+                pendingConfirmAction = null;
+            }
+        }
+
+        // Hide confirm modal
+        function hideConfirmModal() {
+            document.getElementById('confirm-modal').classList.remove('active');
+        }
+
+        // Show rename modal
+        function showRenameModal(chatId, currentTitle) {
+            renamingChatId = chatId;
+            document.getElementById('rename-input').value = currentTitle;
+            document.getElementById('rename-modal').classList.add('active');
+            document.getElementById('rename-input').focus();
+        }
+
+        // Hide rename modal
+        function hideRenameModal() {
+            document.getElementById('rename-modal').classList.remove('active');
+            renamingChatId = null;
+        }
+
+        // Save rename
+        async function saveRename() {
+            const newTitle = document.getElementById('rename-input').value.trim();
+            if (!newTitle || !renamingChatId) return;
+
+            try {
+                const response = await fetch(`/api/chats/${renamingChatId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title: newTitle })
+                });
+
+                if (response.ok) {
+                    showToast('Chat renamed');
+                    loadChatsList();
+
+                    // Update header if this is current chat
+                    if (renamingChatId === currentChatId) {
+                        document.getElementById('chat-title').textContent = newTitle;
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to rename chat:', error);
+                showToast('Failed to rename chat');
+            }
+
+            hideRenameModal();
+        }
+
         // Update status
         async function updateStatus() {
             try {
                 const response = await fetch('/api/status');
                 const data = await response.json();
 
+                const neurons = data.neurons || 100000;
+                document.getElementById('neuron-count').textContent = neurons >= 1000 ? (neurons / 1000) + 'K' : neurons;
                 document.getElementById('vocab-count').textContent = data.vocabulary_size || 0;
                 document.getElementById('concept-count').textContent = data.concepts || 0;
-                document.getElementById('convo-count').textContent = data.conversations || 0;
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
-        // Load saves list
-        async function loadSavesList() {
-            try {
-                const response = await fetch('/api/saves');
-                const saves = await response.json();
-
-                const list = document.getElementById('saves-list');
-
-                if (saves.length === 0) {
-                    list.innerHTML = `<div class="save-item" style="color: var(--text-secondary); font-style: italic;">No saved brains</div>`;
-                    return;
-                }
-
-                list.innerHTML = saves.map(save => `
-                    <div class="save-item" onclick="loadBrain('${save.name}')">
-                        <span>${save.name}</span>
-                        <span class="save-item-info">${save.vocabulary_size} words</span>
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
-        // Show save modal
-        function showSaveModal() {
-            document.getElementById('save-modal').classList.add('active');
-            document.getElementById('save-name').focus();
-        }
-
-        // Hide save modal
-        function hideSaveModal() {
-            document.getElementById('save-modal').classList.remove('active');
-        }
-
-        // Save brain
-        async function saveBrain() {
-            const name = document.getElementById('save-name').value.trim() || 'default';
-
-            try {
-                const response = await fetch('/api/save', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name })
-                });
-
-                if (response.ok) {
-                    showToast('Brain saved!');
-                    loadSavesList();
-                } else {
-                    showToast('Failed to save');
-                }
-            } catch (error) {
-                showToast('Failed to save');
-                console.error(error);
-            }
-
-            hideSaveModal();
-        }
-
-        // Load brain
-        async function loadBrain(name) {
-            try {
-                const response = await fetch('/api/load', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name })
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-
-                    // Clear chat
-                    const chatContent = document.getElementById('chat-content');
-                    chatContent.innerHTML = '';
-
-                    // Load history
-                    if (data.history && data.history.length > 0) {
-                        data.history.forEach(msg => {
-                            addMessage(msg.role, msg.content);
-                        });
-                    } else {
-                        chatContent.innerHTML = `
-                            <div class="welcome-message" id="welcome">
-                                <h2>Brain Loaded: ${name}</h2>
-                                <p>Continue teaching me!</p>
-                            </div>
-                        `;
-                    }
-
-                    updateStatus();
-                    showToast(`Loaded: ${name}`);
-                } else {
-                    showToast('Brain not found');
-                }
-            } catch (error) {
-                showToast('Failed to load');
-                console.error(error);
-            }
-        }
-
-        // New brain
-        async function newBrain() {
-            try {
-                await fetch('/api/new', { method: 'POST' });
-
-                const chatContent = document.getElementById('chat-content');
-                chatContent.innerHTML = `
-                    <div class="welcome-message" id="welcome">
-                        <h2>AGI Brain</h2>
-                        <p>I'm a neural network that learns language from scratch. I have no pre-trained knowledge - I learn entirely from our conversations. Teach me about the world!</p>
-                    </div>
-                `;
-
-                updateStatus();
-                showToast('New brain created');
+                document.getElementById('reasoning-status').textContent = data.reasoning_enabled ? 'Enabled' : 'Disabled';
             } catch (error) {
                 console.error(error);
             }
@@ -777,23 +1222,114 @@
             }, 2000);
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            updateStatus();
-            loadSavesList();
+        // Learn modal state
+        let learnType = 'url';
 
-            // Load history if exists
-            fetch('/api/history')
-                .then(res => res.json())
-                .then(data => {
-                    if (data.history && data.history.length > 0) {
-                        const chatContent = document.getElementById('chat-content');
-                        chatContent.innerHTML = '';
-                        data.history.forEach(msg => {
-                            addMessage(msg.role, msg.content);
-                        });
-                    }
+        // Show learn modal
+        function showLearnModal(type) {
+            learnType = type;
+            const title = document.getElementById('learn-modal-title');
+            const desc = document.getElementById('learn-modal-desc');
+            const input = document.getElementById('learn-url');
+
+            if (type === 'youtube') {
+                title.textContent = 'Learn from YouTube';
+                desc.textContent = 'Enter a YouTube video URL to learn from its transcript';
+                input.placeholder = 'https://youtube.com/watch?v=...';
+            } else {
+                title.textContent = 'Learn from URL';
+                desc.textContent = 'Enter a web page URL to learn from its content';
+                input.placeholder = 'https://example.com/article';
+            }
+
+            document.getElementById('learn-modal').classList.add('active');
+            input.value = '';
+            input.focus();
+        }
+
+        // Hide learn modal
+        function hideLearnModal() {
+            document.getElementById('learn-modal').classList.remove('active');
+        }
+
+        // Learn from source
+        async function learnFromSource() {
+            const url = document.getElementById('learn-url').value.trim();
+            if (!url) {
+                showToast('Please enter a URL');
+                return;
+            }
+
+            const btn = document.getElementById('learn-btn');
+            btn.textContent = 'Learning...';
+            btn.disabled = true;
+
+            const endpoint = learnType === 'youtube' ? '/api/learn-youtube' : '/api/learn-url';
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
                 });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    hideLearnModal();
+
+                    if (learnType === 'youtube') {
+                        addMessage('assistant', `Learned from YouTube video: "${data.title || 'Video'}". Acquired ${data.words_learned} new words from ${data.segments} segments.`);
+                    } else {
+                        addMessage('assistant', `Learned from web page! Acquired ${data.words_learned} new words from ${data.sentences} sentences.`);
+                    }
+
+                    showToast(`Learned ${data.words_learned} words!`);
+                    updateStatus();
+                } else {
+                    showToast('Failed to learn: ' + (data.detail || 'Unknown error'));
+                }
+            } catch (error) {
+                showToast('Failed to learn from URL');
+                console.error(error);
+            }
+
+            btn.textContent = 'Learn';
+            btn.disabled = false;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            updateStatus();
+            loadChatsList();
+            loadTrashList();
+
+            // Load current chat
+            try {
+                const response = await fetch('/api/chats/current');
+                const data = await response.json();
+
+                if (data.chat) {
+                    currentChatId = data.chat.id;
+                    document.getElementById('chat-title').textContent = data.chat.title;
+
+                    if (data.chat.messages && data.chat.messages.length > 0) {
+                        document.getElementById('chat-content').innerHTML = '';
+                        data.chat.messages.forEach(msg => addMessage(msg.role, msg.content));
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load current chat:', error);
+            }
+
+            loadChatsList();
+        });
+
+        // Handle Enter in rename modal
+        document.getElementById('rename-input').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                saveRename();
+            }
         });
     </script>
 </body>

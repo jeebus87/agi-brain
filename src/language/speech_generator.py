@@ -267,19 +267,19 @@ class NeuralVocoder:
 
         # Hidden layer
         self.hidden_size = 256
-        self.w1 = self.rng.randn(self.hidden_size, self.input_size).astype(np.float32) * 0.1
+        self.w1 = self.rng.standard_normal((self.hidden_size, self.input_size)).astype(np.float32) * 0.1
         self.b1 = np.zeros(self.hidden_size, dtype=np.float32)
 
         # Output: phoneme probabilities
         self.output_size = self.config.n_phonemes
-        self.w2 = self.rng.randn(self.output_size, self.hidden_size).astype(np.float32) * 0.1
+        self.w2 = self.rng.standard_normal((self.output_size, self.hidden_size)).astype(np.float32) * 0.1
         self.b2 = np.zeros(self.output_size, dtype=np.float32)
 
         # Phoneme labels
         self.phoneme_labels = list(self.synthesizer.phoneme_formants.keys())
 
         # Prosody network
-        self.w_prosody = self.rng.randn(3, self.hidden_size).astype(np.float32) * 0.1
+        self.w_prosody = self.rng.standard_normal((3, self.hidden_size)).astype(np.float32) * 0.1
 
     def forward(self, spikes: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
         """

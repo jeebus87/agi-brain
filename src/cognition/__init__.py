@@ -1,6 +1,2 @@
-"""Cognitive function implementations."""
-
-from .working_memory import WorkingMemory
-from .executive import ExecutiveController
-
-__all__ = ["WorkingMemory", "ExecutiveController"]
+"""Cognition modules for AGI Brain."""
+from .thought_process import ThoughtProcess, Thought, ThoughtType, CognitiveState, Drive
