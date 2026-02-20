@@ -1,0 +1,48 @@
+{
+  "id": "3b8729cb",
+  "title": "What is a cat?",
+  "created_at": "2026-02-19T18:09:47.826996",
+  "updated_at": "2026-02-19T18:10:51.905315",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is a cat?"
+    },
+    {
+      "role": "assistant",
+      "content": "Cat is an animal and mammal. It has fur, tail and whiskers. It can meow, purr and climb."
+    },
+    {
+      "role": "user",
+      "content": "Tell me everything about dogs"
+    },
+    {
+      "role": "assistant",
+      "content": "Dogs is new to me. What is it?"
+    },
+    {
+      "role": "user",
+      "content": "What is a zorplex?"
+    },
+    {
+      "role": "assistant",
+      "content": "Zorplex is a fictional."
+    },
+    {
+      "role": "user",
+      "content": "A wumpus is a dangerous monster that lives in caves"
+    },
+    {
+      "role": "assistant",
+      "content": "Dangerous is new to me. What is it?"
+    },
+    {
+      "role": "user",
+      "content": "Describe a wumpus in detail"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm curious about describe. What can you share?"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "7af1af5f",
+  "title": "Hello",
+  "created_at": "2026-02-19T17:37:31.660539",
+  "updated_at": "2026-02-19T17:39:55.272988",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hello"
+    },
+    {
+      "role": "assistant",
+      "content": "Hey! Nice to chat with you. What would you like to talk about?"
+    },
+    {
+      "role": "user",
+      "content": "How are you?"
+    },
+    {
+      "role": "assistant",
+      "content": "Doing well! What's on your mind today?"
+    },
+    {
+      "role": "user",
+      "content": "What is a cat?"
+    },
+    {
+      "role": "assistant",
+      "content": "Cat is an animal and mammal. It has fur, tail and whiskers. It can meow, purr and climb."
+    },
+    {
+      "role": "user",
+      "content": "What is a dog?"
+    },
+    {
+      "role": "assistant",
+      "content": "Dog is an animal and mammal. It has fur, tail and paws. It can bark, run and fetch."
+    },
+    {
+      "role": "user",
+      "content": "My name is Sarah"
+    },
+    {
+      "role": "assistant",
+      "content": "Hello Sarah! Great to meet you. What's on your mind?"
+    },
+    {
+      "role": "user",
+      "content": "Thank you"
+    },
+    {
+      "role": "assistant",
+      "content": "You're welcome! Happy to help."
+    },
+    {
+      "role": "user",
+      "content": "Goodbye"
+    },
+    {
+      "role": "assistant",
+      "content": "See you later! Enjoyed our conversation."
+    },
+    {
+      "role": "user",
+      "content": "What is blockchain?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm not certain about that. Could you share what you know so I can learn?"
+    },
+    {
+      "role": "user",
+      "content": "Why do dogs bark?"
+    },
+    {
+      "role": "assistant",
+      "content": "Honestly, I don't know enough to give a good answer. I'd love to learn from you."
+    }
+  ]
+}

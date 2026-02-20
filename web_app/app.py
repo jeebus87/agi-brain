@@ -1,5 +1,5 @@
 """
-AGI Brain Web App - Full Cognitive Architecture
+Xemsa - Autonomous AI Brain
 
 Run with: python web_app/app.py
 Open: http://localhost:8000
@@ -24,7 +24,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from web_app.full_brain import FullAGIBrain, BrainConfig
 
 # Initialize app
-app = FastAPI(title="AGI Brain - Full Cognitive Architecture")
+app = FastAPI(title="Xemsa - Autonomous AI")
 
 # Storage directories
 BRAIN_DIR = Path(__file__).parent / "brain_data"
@@ -511,7 +511,7 @@ async def startup_event():
 
 if __name__ == "__main__":
     print("\n" + "="*60)
-    print("     AGI Brain - Full Cognitive Architecture")
+    print("     Xemsa - Autonomous AI")
     print("="*60)
     print(f"\n  Neurons: {brain.config.n_neurons:,}")
     print(f"  Reasoning: {'Enabled' if brain.config.enable_reasoning else 'Disabled'}")

@@ -1,0 +1,16 @@
+{
+  "id": "c97fa7a6",
+  "title": "Hello",
+  "created_at": "2026-02-19T17:37:04.883077",
+  "updated_at": "2026-02-19T17:37:17.879237",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hello"
+    },
+    {
+      "role": "assistant",
+      "content": "Hello! Great to hear from you. What's on your mind?"
+    }
+  ]
+}

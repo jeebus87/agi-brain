@@ -1,0 +1,13 @@
+allContacts:
+  email: joevalles87@gmail.com
+  phoneNumber: "+1.5052057404"
+  postalAddress:
+    regionCode: US
+    postalCode: "91203"
+    administrativeArea: CA
+    locality: Glendale
+    addressLines:
+      - "540 N Central Ave NW"
+      - "Apt 531"
+    recipients:
+      - "Joseph Valles"

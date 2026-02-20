@@ -1,0 +1,32 @@
+{
+  "id": "33c5d8bf",
+  "title": "What is a zorplex?",
+  "created_at": "2026-02-19T18:01:41.026584",
+  "updated_at": "2026-02-19T18:02:19.205592",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is a zorplex?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'd like to learn about zorplex. What should I know?"
+    },
+    {
+      "role": "user",
+      "content": "A zorplex is a fictional robot that can fly"
+    },
+    {
+      "role": "assistant",
+      "content": "Fictional is new to me. What is it?"
+    },
+    {
+      "role": "user",
+      "content": "What is a zorplex?"
+    },
+    {
+      "role": "assistant",
+      "content": "Zorplex is a fictional."
+    }
+  ]
+}

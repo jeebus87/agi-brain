@@ -1,0 +1,16 @@
+{
+  "id": "a651b4d6",
+  "title": "Why do cats meow?",
+  "created_at": "2026-02-19T17:36:33.865523",
+  "updated_at": "2026-02-19T17:36:46.877205",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Why do cats meow?"
+    },
+    {
+      "role": "assistant",
+      "content": "That's outside my current knowledge. What can you tell me about it?"
+    }
+  ]
+}

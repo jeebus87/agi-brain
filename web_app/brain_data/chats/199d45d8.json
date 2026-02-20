@@ -1,0 +1,24 @@
+{
+  "id": "199d45d8",
+  "title": "What is an elephant?",
+  "created_at": "2026-02-19T18:00:08.056874",
+  "updated_at": "2026-02-19T18:00:33.845057",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is an elephant?"
+    },
+    {
+      "role": "assistant",
+      "content": "elephant is a animal and mammal. It has trunk, tusks."
+    },
+    {
+      "role": "user",
+      "content": "What is an elephant?"
+    },
+    {
+      "role": "assistant",
+      "content": "elephant is a animal and mammal. It has trunk, tusks."
+    }
+  ]
+}

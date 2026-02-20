@@ -1,0 +1,1922 @@
+{
+  "relationships": [
+    {
+      "subject": "cat",
+      "relation": "IS_A",
+      "object": "animal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "cat",
+      "relation": "IS_A",
+      "object": "mammal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "cat",
+      "relation": "IS_A",
+      "object": "pet",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "cat",
+      "relation": "HAS_A",
+      "object": "fur",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "cat",
+      "relation": "HAS_A",
+      "object": "tail",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "cat",
+      "relation": "HAS_A",
+      "object": "whiskers",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "cat",
+      "relation": "CAN_DO",
+      "object": "meow",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "cat",
+      "relation": "CAN_DO",
+      "object": "purr",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "cat",
+      "relation": "CAN_DO",
+      "object": "climb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dog",
+      "relation": "IS_A",
+      "object": "animal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dog",
+      "relation": "IS_A",
+      "object": "mammal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dog",
+      "relation": "IS_A",
+      "object": "pet",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dog",
+      "relation": "HAS_A",
+      "object": "fur",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dog",
+      "relation": "HAS_A",
+      "object": "tail",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dog",
+      "relation": "HAS_A",
+      "object": "paws",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dog",
+      "relation": "CAN_DO",
+      "object": "bark",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dog",
+      "relation": "CAN_DO",
+      "object": "run",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dog",
+      "relation": "CAN_DO",
+      "object": "fetch",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dog",
+      "relation": "IS_A",
+      "object": "loyal",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "bird",
+      "relation": "IS_A",
+      "object": "animal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "bird",
+      "relation": "HAS_A",
+      "object": "feathers",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "bird",
+      "relation": "HAS_A",
+      "object": "wings",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "bird",
+      "relation": "HAS_A",
+      "object": "beak",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "bird",
+      "relation": "CAN_DO",
+      "object": "fly",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "bird",
+      "relation": "CAN_DO",
+      "object": "sing",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "fish",
+      "relation": "IS_A",
+      "object": "animal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "fish",
+      "relation": "HAS_A",
+      "object": "fins",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "fish",
+      "relation": "HAS_A",
+      "object": "scales",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "fish",
+      "relation": "CAN_DO",
+      "object": "swim",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "fish",
+      "relation": "LOCATED_IN",
+      "object": "water",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "elephant",
+      "relation": "IS_A",
+      "object": "animal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "elephant",
+      "relation": "IS_A",
+      "object": "mammal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "elephant",
+      "relation": "HAS_A",
+      "object": "trunk",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "elephant",
+      "relation": "HAS_A",
+      "object": "tusks",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "lion",
+      "relation": "IS_A",
+      "object": "animal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "lion",
+      "relation": "IS_A",
+      "object": "mammal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "lion",
+      "relation": "CAN_DO",
+      "object": "roar",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "lion",
+      "relation": "LOCATED_IN",
+      "object": "africa",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "tree",
+      "relation": "IS_A",
+      "object": "plant",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "tree",
+      "relation": "HAS_A",
+      "object": "leaves",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "tree",
+      "relation": "HAS_A",
+      "object": "trunk",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "tree",
+      "relation": "HAS_A",
+      "object": "roots",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "tree",
+      "relation": "MADE_OF",
+      "object": "wood",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "flower",
+      "relation": "IS_A",
+      "object": "plant",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "flower",
+      "relation": "HAS_A",
+      "object": "petals",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "sun",
+      "relation": "IS_A",
+      "object": "star",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "sun",
+      "relation": "CAUSES",
+      "object": "light",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "sun",
+      "relation": "CAUSES",
+      "object": "heat",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "moon",
+      "relation": "LOCATED_IN",
+      "object": "sky",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "moon",
+      "relation": "CAUSES",
+      "object": "tides",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "water",
+      "relation": "IS_A",
+      "object": "liquid",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "water",
+      "relation": "MADE_OF",
+      "object": "hydrogen",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "water",
+      "relation": "MADE_OF",
+      "object": "oxygen",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "fire",
+      "relation": "CAUSES",
+      "object": "heat",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "fire",
+      "relation": "CAUSES",
+      "object": "light",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "fire",
+      "relation": "CAUSES",
+      "object": "smoke",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "ice",
+      "relation": "IS_A",
+      "object": "solid",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "ice",
+      "relation": "MADE_OF",
+      "object": "water",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "car",
+      "relation": "IS_A",
+      "object": "vehicle",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "car",
+      "relation": "HAS_A",
+      "object": "wheels",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "car",
+      "relation": "HAS_A",
+      "object": "engine",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "car",
+      "relation": "USED_FOR",
+      "object": "transportation",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "car",
+      "relation": "CAN_DO",
+      "object": "drive",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "computer",
+      "relation": "IS_A",
+      "object": "device",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "computer",
+      "relation": "HAS_A",
+      "object": "screen",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "computer",
+      "relation": "HAS_A",
+      "object": "keyboard",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "computer",
+      "relation": "USED_FOR",
+      "object": "computing",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "phone",
+      "relation": "IS_A",
+      "object": "device",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "phone",
+      "relation": "USED_FOR",
+      "object": "communication",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "book",
+      "relation": "HAS_A",
+      "object": "pages",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "book",
+      "relation": "USED_FOR",
+      "object": "reading",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "book",
+      "relation": "MADE_OF",
+      "object": "paper",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "table",
+      "relation": "IS_A",
+      "object": "furniture",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "table",
+      "relation": "MADE_OF",
+      "object": "wood",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "table",
+      "relation": "HAS_A",
+      "object": "legs",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "table",
+      "relation": "USED_FOR",
+      "object": "eating",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "chair",
+      "relation": "IS_A",
+      "object": "furniture",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "chair",
+      "relation": "USED_FOR",
+      "object": "sitting",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "chair",
+      "relation": "HAS_A",
+      "object": "legs",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "science",
+      "relation": "IS_A",
+      "object": "knowledge",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "science",
+      "relation": "USED_FOR",
+      "object": "understanding",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "mathematics",
+      "relation": "IS_A",
+      "object": "science",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "mathematics",
+      "relation": "USED_FOR",
+      "object": "calculation",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "physics",
+      "relation": "IS_A",
+      "object": "science",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "physics",
+      "relation": "PART_OF",
+      "object": "science",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "biology",
+      "relation": "IS_A",
+      "object": "science",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "biology",
+      "relation": "PART_OF",
+      "object": "science",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "language",
+      "relation": "USED_FOR",
+      "object": "communication",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "hot",
+      "relation": "OPPOSITE_OF",
+      "object": "cold",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "big",
+      "relation": "OPPOSITE_OF",
+      "object": "small",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "big",
+      "relation": "IS_A",
+      "object": "adjective",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "fast",
+      "relation": "OPPOSITE_OF",
+      "object": "slow",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "light",
+      "relation": "OPPOSITE_OF",
+      "object": "dark",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "good",
+      "relation": "OPPOSITE_OF",
+      "object": "bad",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "happy",
+      "relation": "OPPOSITE_OF",
+      "object": "sad",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "wet",
+      "relation": "OPPOSITE_OF",
+      "object": "dry",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "old",
+      "relation": "OPPOSITE_OF",
+      "object": "new",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "large",
+      "relation": "SIMILAR_TO",
+      "object": "big",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "tiny",
+      "relation": "SIMILAR_TO",
+      "object": "small",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "quick",
+      "relation": "SIMILAR_TO",
+      "object": "fast",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "noun",
+      "relation": "IS_A",
+      "object": "word",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "noun",
+      "relation": "USED_FOR",
+      "object": "naming",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "noun",
+      "relation": "HAS_A",
+      "object": "singular",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "noun",
+      "relation": "HAS_A",
+      "object": "plural",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "noun",
+      "relation": "IS_A",
+      "object": "naming",
+      "confidence": 0.85,
+      "source": "learned"
+    },
+    {
+      "subject": "pronoun",
+      "relation": "IS_A",
+      "object": "word",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "pronoun",
+      "relation": "USED_FOR",
+      "object": "replacement",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "verb",
+      "relation": "IS_A",
+      "object": "word",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "verb",
+      "relation": "USED_FOR",
+      "object": "action",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "verb",
+      "relation": "HAS_A",
+      "object": "tense",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "verb",
+      "relation": "HAS_A",
+      "object": "conjugation",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "verb",
+      "relation": "IS_A",
+      "object": "action",
+      "confidence": 0.85,
+      "source": "learned"
+    },
+    {
+      "subject": "adjective",
+      "relation": "IS_A",
+      "object": "word",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "adjective",
+      "relation": "USED_FOR",
+      "object": "description",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "adverb",
+      "relation": "IS_A",
+      "object": "word",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "adverb",
+      "relation": "USED_FOR",
+      "object": "modification",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "preposition",
+      "relation": "IS_A",
+      "object": "word",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "conjunction",
+      "relation": "IS_A",
+      "object": "word",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "article",
+      "relation": "IS_A",
+      "object": "word",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "interjection",
+      "relation": "IS_A",
+      "object": "word",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "a",
+      "relation": "IS_A",
+      "object": "article",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "a",
+      "relation": "USED_FOR",
+      "object": "consonant",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "an",
+      "relation": "IS_A",
+      "object": "article",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "an",
+      "relation": "USED_FOR",
+      "object": "vowel",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "the",
+      "relation": "IS_A",
+      "object": "article",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "the",
+      "relation": "USED_FOR",
+      "object": "specific",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "present",
+      "relation": "IS_A",
+      "object": "tense",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "past",
+      "relation": "IS_A",
+      "object": "tense",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "future",
+      "relation": "IS_A",
+      "object": "tense",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "progressive",
+      "relation": "IS_A",
+      "object": "aspect",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "perfect",
+      "relation": "IS_A",
+      "object": "aspect",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "simple",
+      "relation": "IS_A",
+      "object": "aspect",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "ate",
+      "relation": "IS_A",
+      "object": "past",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "eaten",
+      "relation": "IS_A",
+      "object": "participle",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "went",
+      "relation": "IS_A",
+      "object": "past",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "gone",
+      "relation": "IS_A",
+      "object": "participle",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "got",
+      "relation": "IS_A",
+      "object": "past",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "gotten",
+      "relation": "IS_A",
+      "object": "participle",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "learned",
+      "relation": "IS_A",
+      "object": "past",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "dreamed",
+      "relation": "IS_A",
+      "object": "past",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "burned",
+      "relation": "IS_A",
+      "object": "past",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "spelled",
+      "relation": "IS_A",
+      "object": "past",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "will",
+      "relation": "IS_A",
+      "object": "modal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "would",
+      "relation": "IS_A",
+      "object": "modal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "can",
+      "relation": "IS_A",
+      "object": "modal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "can",
+      "relation": "IS_A",
+      "object": "poodle",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "could",
+      "relation": "IS_A",
+      "object": "modal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "should",
+      "relation": "IS_A",
+      "object": "modal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "must",
+      "relation": "IS_A",
+      "object": "modal",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "sentence",
+      "relation": "HAS_A",
+      "object": "subject",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "sentence",
+      "relation": "HAS_A",
+      "object": "predicate",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "sentence",
+      "relation": "HAS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "clause",
+      "relation": "IS_A",
+      "object": "phrase",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "phrase",
+      "relation": "PART_OF",
+      "object": "sentence",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "subject",
+      "relation": "PART_OF",
+      "object": "sentence",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "predicate",
+      "relation": "PART_OF",
+      "object": "sentence",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "object",
+      "relation": "PART_OF",
+      "object": "sentence",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "hello",
+      "relation": "IS_A",
+      "object": "greeting",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "goodbye",
+      "relation": "IS_A",
+      "object": "farewell",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "thanks",
+      "relation": "SIMILAR_TO",
+      "object": "gratitude",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "please",
+      "relation": "IS_A",
+      "object": "politeness",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "sorry",
+      "relation": "IS_A",
+      "object": "apology",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "welcome",
+      "relation": "IS_A",
+      "object": "greeting",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "question",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "dog",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "bird",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "cat",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "dragon",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "unicorn",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "phoenix",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "griffin",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "elephant",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "zorplex",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "blurp",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "snorp",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "what",
+      "relation": "IS_A",
+      "object": "fish",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "where",
+      "relation": "IS_A",
+      "object": "question",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "when",
+      "relation": "IS_A",
+      "object": "question",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "why",
+      "relation": "IS_A",
+      "object": "question",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "how",
+      "relation": "IS_A",
+      "object": "question",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "how",
+      "relation": "IS_A",
+      "object": "you",
+      "confidence": 0.85,
+      "source": "learned"
+    },
+    {
+      "subject": "who",
+      "relation": "IS_A",
+      "object": "question",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "today",
+      "relation": "IS_A",
+      "object": "time",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "tomorrow",
+      "relation": "IS_A",
+      "object": "time",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "yesterday",
+      "relation": "IS_A",
+      "object": "time",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "now",
+      "relation": "IS_A",
+      "object": "time",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "always",
+      "relation": "IS_A",
+      "object": "frequency",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "never",
+      "relation": "IS_A",
+      "object": "frequency",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "sometimes",
+      "relation": "IS_A",
+      "object": "frequency",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "often",
+      "relation": "IS_A",
+      "object": "frequency",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "yes",
+      "relation": "IS_A",
+      "object": "affirmation",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "no",
+      "relation": "IS_A",
+      "object": "negation",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "maybe",
+      "relation": "IS_A",
+      "object": "uncertainty",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "perhaps",
+      "relation": "SIMILAR_TO",
+      "object": "maybe",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "and",
+      "relation": "IS_A",
+      "object": "conjunction",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "and",
+      "relation": "IS_A",
+      "object": "predicate",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "but",
+      "relation": "IS_A",
+      "object": "conjunction",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "or",
+      "relation": "IS_A",
+      "object": "conjunction",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "because",
+      "relation": "IS_A",
+      "object": "conjunction",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "therefore",
+      "relation": "IS_A",
+      "object": "conjunction",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "however",
+      "relation": "IS_A",
+      "object": "conjunction",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "i",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "you",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "he",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "she",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "it",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "we",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "they",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "me",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "him",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "her",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "us",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "them",
+      "relation": "IS_A",
+      "object": "pronoun",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "be",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "have",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "do",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "say",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "say",
+      "relation": "IS_A",
+      "object": "dog",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "say",
+      "relation": "IS_A",
+      "object": "apple",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "say",
+      "relation": "IS_A",
+      "object": "house",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "say",
+      "relation": "IS_A",
+      "object": "elephant",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "go",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "get",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "make",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "know",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "think",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "take",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "see",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "come",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "want",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "look",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "use",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "use",
+      "relation": "IS_A",
+      "object": "before",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "find",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "give",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "tell",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "work",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "call",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.95,
+      "source": "dictionary"
+    },
+    {
+      "subject": "poodle",
+      "relation": "IS_A",
+      "object": "dog",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "has",
+      "relation": "IS_A",
+      "object": "subject",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "run",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "jump",
+      "relation": "IS_A",
+      "object": "verb",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "small",
+      "relation": "IS_A",
+      "object": "adjective",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "red",
+      "relation": "IS_A",
+      "object": "adjective",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "quickly",
+      "relation": "IS_A",
+      "object": "adverb",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "slowly",
+      "relation": "IS_A",
+      "object": "adverb",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "dragon",
+      "relation": "IS_A",
+      "object": "mythical",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "that",
+      "relation": "CAN_DO",
+      "object": "breathe",
+      "confidence": 0.8,
+      "source": "learned"
+    },
+    {
+      "subject": "that",
+      "relation": "CAN_DO",
+      "object": "fly",
+      "confidence": 0.8,
+      "source": "learned"
+    },
+    {
+      "subject": "that",
+      "relation": "LOCATED_IN",
+      "object": "cave",
+      "confidence": 0.8,
+      "source": "learned"
+    },
+    {
+      "subject": "unicorn",
+      "relation": "IS_A",
+      "object": "horse",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "unicorn",
+      "relation": "IS_A",
+      "object": "magical",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "with",
+      "relation": "IS_A",
+      "object": "magical",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "with",
+      "relation": "IS_A",
+      "object": "horn",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "phoenix",
+      "relation": "IS_A",
+      "object": "bird",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "griffin",
+      "relation": "IS_A",
+      "object": "creature",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "zorplex",
+      "relation": "IS_A",
+      "object": "fictional",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "a blurp",
+      "relation": "IS_A",
+      "object": "small creature",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "blurp",
+      "relation": "IS_A",
+      "object": "small",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "snorp",
+      "relation": "IS_A",
+      "object": "type",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "snorp",
+      "relation": "IS_A",
+      "object": "plant",
+      "confidence": 0.95,
+      "source": "learned"
+    },
+    {
+      "subject": "wumpu",
+      "relation": "IS_A",
+      "object": "dangerou",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "describe",
+      "relation": "IS_A",
+      "object": "wumpu",
+      "confidence": 0.7,
+      "source": "learned"
+    },
+    {
+      "subject": "a dog",
+      "relation": "IS_A",
+      "object": "loyal animal that barks and wags its tail",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "a bird",
+      "relation": "IS_A",
+      "object": "animal with feathers that can fly",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "a unicorn",
+      "relation": "IS_A",
+      "object": "magical horse with a horn on its head",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "a unicorn",
+      "relation": "IS_A",
+      "object": "magical horse",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "pennywise",
+      "relation": "IS_A",
+      "object": "evil",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "pennywise",
+      "relation": "IS_A",
+      "object": "character in it",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "pennywise",
+      "relation": "IS_A",
+      "object": "character",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "pennywise",
+      "relation": "IS_A",
+      "object": "evil clown that hunts children",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "pennywise",
+      "relation": "CAN_DO",
+      "object": "shapeshift",
+      "confidence": 0.8,
+      "source": "learned"
+    },
+    {
+      "subject": "pennywise",
+      "relation": "IS_A",
+      "object": "evil clown",
+      "confidence": 0.9,
+      "source": "learned"
+    },
+    {
+      "subject": "leader",
+      "relation": "HAS_A",
+      "object": "loser",
+      "confidence": 0.6,
+      "source": "learned"
+    }
+  ]
+}

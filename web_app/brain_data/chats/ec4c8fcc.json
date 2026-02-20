@@ -1,0 +1,56 @@
+{
+  "id": "ec4c8fcc",
+  "title": "What is a dragon?",
+  "created_at": "2026-02-19T17:50:49.133798",
+  "updated_at": "2026-02-19T17:52:18.577405",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is a dragon?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'd like to learn about dragon. What should I know?"
+    },
+    {
+      "role": "user",
+      "content": "A dragon is a mythical creature that can breathe fire"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm curious about mythical. What can you share?"
+    },
+    {
+      "role": "user",
+      "content": "What is a dragon?"
+    },
+    {
+      "role": "assistant",
+      "content": "Dragon is a mythical."
+    },
+    {
+      "role": "user",
+      "content": "What about fire?"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me think about fire... I know about fire: "
+    },
+    {
+      "role": "user",
+      "content": "Mythical means something from legends and stories"
+    },
+    {
+      "role": "assistant",
+      "content": "I don't know much about something yet. Can you tell me about it?"
+    },
+    {
+      "role": "user",
+      "content": "How are you?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm doing well - I've been learning. I know about 4 things now. How are you?"
+    }
+  ]
+}

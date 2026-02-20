@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGI Brain</title>
+    <title>Xemsa</title>
     <style>
         * {
             margin: 0;
@@ -688,7 +688,7 @@
     <!-- Main content -->
     <main class="main">
         <header class="header">
-            <h1 id="chat-title">AGI Brain</h1>
+            <h1 id="chat-title">Xemsa</h1>
             <div class="header-actions">
                 <button class="header-btn secondary" onclick="showLearnModal('url')">Learn from URL</button>
                 <button class="header-btn secondary" onclick="showLearnModal('youtube')">Learn YouTube</button>
@@ -698,7 +698,7 @@
         <div class="chat-container" id="chat-container">
             <div class="chat-content" id="chat-content">
                 <div class="welcome-message" id="welcome">
-                    <h2>AGI Brain</h2>
+                    <h2>Xemsa</h2>
                     <p>Full Cognitive Architecture with 100K spiking neurons, reasoning engine, and continuous learning. Start a conversation!</p>
                 </div>
             </div>
@@ -709,7 +709,7 @@
                 <div class="input-box">
                     <textarea
                         id="message-input"
-                        placeholder="Message AGI Brain..."
+                        placeholder="Message Xemsa..."
                         rows="1"
                         onkeydown="handleKeyDown(event)"
                         oninput="autoResize(this)"
@@ -1006,7 +1006,7 @@
                     } else {
                         chatContent.innerHTML = `
                             <div class="welcome-message" id="welcome">
-                                <h2>AGI Brain</h2>
+                                <h2>Xemsa</h2>
                                 <p>Continue your conversation or start a new one.</p>
                             </div>
                         `;
@@ -1036,7 +1036,7 @@
                     document.getElementById('chat-title').textContent = 'New Chat';
                     document.getElementById('chat-content').innerHTML = `
                         <div class="welcome-message" id="welcome">
-                            <h2>AGI Brain</h2>
+                            <h2>Xemsa</h2>
                             <p>New conversation started. All knowledge preserved: ${data.vocabulary || 0} words, ${data.knowledge_facts || 0} facts.</p>
                         </div>
                     `;
